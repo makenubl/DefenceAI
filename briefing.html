@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pakistan Army AI — Executive Briefing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --g:#01d96b;--g2:rgba(1,217,107,0.12);--g3:rgba(1,217,107,0.35);
+  --a:#ff8c00;--a2:rgba(255,140,0,0.12);--a3:rgba(255,140,0,0.35);
+  --b:#00c3ff;--b2:rgba(0,195,255,0.12);--b3:rgba(0,195,255,0.35);
+  --r:#ff3355;--r2:rgba(255,51,85,0.12);--r3:rgba(255,51,85,0.35);
+  --bg:#020c14;--s1:#040f1c;--s2:#071626;--card:#091d30;
+  --border:rgba(1,217,107,0.15);--text:#c8dde8;--dim:#5a7a8a;
+  --font-head:'Orbitron',sans-serif;--font-body:'Rajdhani',sans-serif;--font-mono:'JetBrains Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:16px;line-height:1.6;overflow-x:hidden}
+#scroll-prog{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--g),var(--b));width:0%;z-index:9999;transition:width .1s linear}
+
+/* LOADER */
+#loader{position:fixed;inset:0;background:var(--bg);z-index:10000;display:flex;flex-direction:column;align-items:center;justify-content:center}
+#loader-canvas{opacity:.9}
+.loader-title{font-family:var(--font-head);font-size:1.1rem;letter-spacing:.3em;color:var(--g);margin-top:1.5rem;text-align:center}
+.loader-sub{font-family:var(--font-mono);font-size:.65rem;color:var(--dim);letter-spacing:.2em;margin-top:.5rem}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(2,12,20,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:.9rem 2rem;display:flex;align-items:center;justify-content:space-between}
+.nav-brand{font-family:var(--font-head);font-size:.85rem;letter-spacing:.15em;color:var(--g);text-decoration:none}
+.nav-links{display:flex;gap:1.5rem;align-items:center}
+.nav-links a{color:var(--dim);text-decoration:none;font-size:.8rem;letter-spacing:.1em;font-family:var(--font-head);transition:color .3s}
+.nav-links a:hover{color:var(--g)}
+.nav-back{border:1px solid var(--border);padding:.4rem .9rem;border-radius:4px;color:var(--g) !important}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:6rem 2rem 4rem}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(1,217,107,0.06) 0%,transparent 70%)}
+.hero-content{text-align:center;max-width:900px;position:relative;z-index:2}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;border:1px solid var(--g3);background:var(--g2);padding:.4rem 1.2rem;border-radius:2rem;font-family:var(--font-mono);font-size:.7rem;letter-spacing:.15em;color:var(--g);margin-bottom:2rem}
+.hero h1{font-family:var(--font-head);font-size:clamp(2rem,5vw,3.8rem);font-weight:900;line-height:1.15;color:#fff;margin-bottom:1.5rem}
+.hero h1 span{color:var(--g)}
+.hero-sub{font-size:1.2rem;color:var(--text);max-width:650px;margin:0 auto 3rem;font-weight:300;line-height:1.8}
+.hero-stats{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;margin-bottom:3rem}
+.hstat{text-align:center;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.2rem 2rem}
+.hstat-num{font-family:var(--font-head);font-size:2rem;color:var(--g);font-weight:700}
+.hstat-lbl{font-size:.75rem;color:var(--dim);letter-spacing:.1em;margin-top:.3rem}
+.scroll-hint{color:var(--dim);font-size:.75rem;letter-spacing:.2em;font-family:var(--font-mono);animation:bounce 2s infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+
+/* SECTIONS */
+section{padding:5rem 2rem;max-width:1200px;margin:0 auto}
+.sec-label{font-family:var(--font-mono);font-size:.65rem;letter-spacing:.25em;color:var(--g);margin-bottom:.5rem}
+.sec-title{font-family:var(--font-head);font-size:clamp(1.4rem,3vw,2.2rem);color:#fff;margin-bottom:1rem}
+.sec-desc{color:var(--text);font-size:1.05rem;max-width:700px;margin-bottom:3rem;line-height:1.8}
+hr.divider{border:none;border-top:1px solid var(--border);margin:0 2rem}
+
+/* APPLICATION CARDS */
+.app-block{margin-bottom:6rem}
+.app-header{display:flex;align-items:center;gap:1.5rem;margin-bottom:2.5rem}
+.app-num{font-family:var(--font-head);font-size:3rem;color:var(--g3);font-weight:900;min-width:60px}
+.app-meta{}
+.app-name{font-family:var(--font-head);font-size:1.4rem;color:#fff;margin-bottom:.3rem}
+.app-tagline{color:var(--g);font-size:.9rem;letter-spacing:.1em}
+
+.sim-wrap{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:2rem}
+@media(max-width:768px){.sim-wrap{grid-template-columns:1fr}}
+
+.sim-panel{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.sim-label{padding:.6rem 1rem;font-family:var(--font-mono);font-size:.65rem;letter-spacing:.15em;display:flex;align-items:center;gap:.5rem}
+.sim-label.before{background:var(--r2);color:var(--r);border-bottom:1px solid var(--r3)}
+.sim-label.after{background:var(--g2);color:var(--g);border-bottom:1px solid var(--g3)}
+canvas.sim-canvas{display:block;width:100%;background:var(--s1)}
+
+.impact-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:2rem}
+.impact-card{background:var(--s2);border:1px solid var(--border);border-radius:8px;padding:1.2rem;position:relative;overflow:hidden}
+.impact-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.impact-card.g::before{background:var(--g)}
+.impact-card.a::before{background:var(--a)}
+.impact-card.b::before{background:var(--b)}
+.impact-card.r::before{background:var(--r)}
+.impact-num{font-family:var(--font-head);font-size:1.8rem;font-weight:700;margin-bottom:.2rem}
+.impact-card.g .impact-num{color:var(--g)}
+.impact-card.a .impact-num{color:var(--a)}
+.impact-card.b .impact-num{color:var(--b)}
+.impact-card.r .impact-num{color:var(--r)}
+.impact-txt{font-size:.85rem;color:var(--text)}
+.impact-sub{font-size:.75rem;color:var(--dim);margin-top:.2rem}
+
+.what-box{background:var(--s2);border-left:3px solid var(--g);border-radius:0 8px 8px 0;padding:1.5rem 2rem;margin-bottom:1.5rem}
+.what-box h4{font-family:var(--font-head);font-size:.85rem;color:var(--g);letter-spacing:.15em;margin-bottom:.8rem}
+.what-box p{font-size:1rem;color:var(--text);line-height:1.8}
+
+/* OVERALL IMPACT */
+.impact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem}
+.big-impact-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:2rem;text-align:center}
+.bi-icon{font-size:2.5rem;margin-bottom:1rem;display:block}
+.bi-title{font-family:var(--font-head);font-size:.9rem;color:#fff;margin-bottom:.5rem;letter-spacing:.1em}
+.bi-desc{font-size:.9rem;color:var(--text);line-height:1.7}
+
+/* TIMELINE */
+.timeline{position:relative;padding-left:2rem}
+.timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--g),var(--b),var(--a))}
+.t-item{position:relative;margin-bottom:2.5rem;padding-left:1.5rem}
+.t-item::before{content:'';position:absolute;left:-2.4rem;top:.4rem;width:12px;height:12px;border-radius:50%;background:var(--g);box-shadow:0 0 10px var(--g)}
+.t-month{font-family:var(--font-mono);font-size:.7rem;color:var(--g);letter-spacing:.15em;margin-bottom:.3rem}
+.t-title{font-family:var(--font-head);font-size:1rem;color:#fff;margin-bottom:.4rem}
+.t-desc{font-size:.9rem;color:var(--text)}
+
+/* CTA */
+.cta-box{background:linear-gradient(135deg,var(--g2),transparent);border:1px solid var(--g3);border-radius:16px;padding:4rem;text-align:center;margin:3rem 0}
+.cta-box h2{font-family:var(--font-head);font-size:2rem;color:#fff;margin-bottom:1rem}
+.cta-box p{color:var(--text);font-size:1.1rem;max-width:600px;margin:0 auto 2rem}
+.btn-primary{display:inline-block;padding:1rem 2.5rem;background:var(--g);color:#000;font-family:var(--font-head);font-size:.85rem;letter-spacing:.15em;text-decoration:none;border-radius:4px;font-weight:700;transition:all .3s}
+.btn-primary:hover{background:#fff;box-shadow:0 0 20px var(--g3)}
+
+/* UTILITY */
+.tag{display:inline-block;padding:.2rem .7rem;border-radius:3px;font-size:.7rem;font-family:var(--font-mono);letter-spacing:.1em;margin-right:.4rem;margin-bottom:.4rem}
+.tag-g{background:var(--g2);color:var(--g);border:1px solid var(--g3)}
+.tag-a{background:var(--a2);color:var(--a);border:1px solid var(--a3)}
+.tag-b{background:var(--b2);color:var(--b);border:1px solid var(--b3)}
+.tag-r{background:var(--r2);color:var(--r);border:1px solid var(--r3)}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+.reveal.vis{opacity:1;transform:none}
+
+footer{background:var(--s1);border-top:1px solid var(--border);padding:2rem;text-align:center;font-family:var(--font-mono);font-size:.7rem;color:var(--dim);letter-spacing:.1em}
+</style>
+</head>
+<body>
+
+<div id="scroll-prog"></div>
+
+<!-- LOADER -->
+<div id="loader">
+  <canvas id="loader-canvas" width="200" height="200"></canvas>
+  <div class="loader-title">AI DIRECTORATE</div>
+  <div class="loader-sub">EXECUTIVE BRIEFING // LOADING</div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-brand">◈ PAK ARMY AI</a>
+  <div class="nav-links">
+    <a href="#isr">ISR</a>
+    <a href="#maintenance">Maintenance</a>
+    <a href="#logistics">Logistics</a>
+    <a href="#cyber">Cyber</a>
+    <a href="#simulator">Simulator</a>
+    <a href="index.html" class="nav-back">← Full Roadmap</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span>▶</span> EXECUTIVE BRIEFING — CLASSIFIED CONCEPT
+    </div>
+    <h1>What <span>Artificial Intelligence</span><br>Does for Pakistan Army</h1>
+    <p class="hero-sub">Five things AI can do in the next 18 months — explained without technical jargon. Each simulation below shows the real-world difference AI makes on the ground.</p>
+    <div class="hero-stats" id="hero-stats">
+      <div class="hstat"><div class="hstat-num" data-count="73">0</div><div class="hstat-lbl">% Faster Threat Detection</div></div>
+      <div class="hstat"><div class="hstat-num" data-count="40">0</div><div class="hstat-lbl">% Maintenance Cost Saved</div></div>
+      <div class="hstat"><div class="hstat-num" data-count="18">0</div><div class="hstat-lbl">Months to First Results</div></div>
+      <div class="hstat"><div class="hstat-num" data-count="5">0</div><div class="hstat-lbl">Priority Applications</div></div>
+    </div>
+    <div class="scroll-hint">▼ SCROLL TO SEE SIMULATIONS</div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- APPLICATION 1: ISR -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section id="isr">
+  <div class="sec-label">APPLICATION 01 / 05</div>
+  <h2 class="sec-title">Intelligence Surveillance & Reconnaissance AI</h2>
+  <p class="sec-desc">Right now, analysts watch drone footage for hours to spot a threat. AI watches 50 drones simultaneously, never blinks, never tires — and flags threats in seconds.</p>
+
+  <div class="app-block reveal">
+    <div class="sim-wrap">
+      <div class="sim-panel">
+        <div class="sim-label before">✕ WITHOUT AI — Human analyst watching single feed</div>
+        <canvas class="sim-canvas" id="isr-before" height="280"></canvas>
+      </div>
+      <div class="sim-panel">
+        <div class="sim-label after">✓ WITH AI — Automated multi-feed threat detection</div>
+        <canvas class="sim-canvas" id="isr-after" height="280"></canvas>
+      </div>
+    </div>
+
+    <div class="what-box">
+      <h4>WHAT THIS MEANS FOR THE ARMY</h4>
+      <p>A Shahpar-II drone flies over the border area. Today, one officer watches one video feed at a time. With AI, the same officer monitors 50 feeds simultaneously. The AI automatically draws a box around any vehicle, person, or weapon it detects — flagging it for human review in under 3 seconds. What took 45 minutes of human review takes 8 seconds.</p>
+    </div>
+
+    <div class="impact-row">
+      <div class="impact-card g"><div class="impact-num">8 sec</div><div class="impact-txt">Time to detect a threat</div><div class="impact-sub">Was: 45 minutes of manual review</div></div>
+      <div class="impact-card a"><div class="impact-num">50×</div><div class="impact-txt">More coverage per analyst</div><div class="impact-sub">One operator, 50 simultaneous feeds</div></div>
+      <div class="impact-card b"><div class="impact-num">24/7</div><div class="impact-txt">Non-stop monitoring</div><div class="impact-sub">No fatigue, no shift breaks</div></div>
+      <div class="impact-card r"><div class="impact-num">92%</div><div class="impact-txt">Detection accuracy</div><div class="impact-sub">Comparable to Israel's Gospel system</div></div>
+    </div>
+
+    <div style="margin-top:.5rem">
+      <span class="tag tag-g">Shahpar-II Drones</span>
+      <span class="tag tag-g">Border Surveillance</span>
+      <span class="tag tag-a">Target Identification</span>
+      <span class="tag tag-b">NUST AI Team</span>
+      <span class="tag tag-b">Ready in 12 Months</span>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- APPLICATION 2: PREDICTIVE MAINTENANCE -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section id="maintenance">
+  <div class="sec-label">APPLICATION 02 / 05</div>
+  <h2 class="sec-title">Predictive Maintenance AI</h2>
+  <p class="sec-desc">AI reads engine sensors on tanks, helicopters, and aircraft to predict failures weeks before they happen — preventing breakdowns mid-mission.</p>
+
+  <div class="app-block reveal">
+    <div class="sim-wrap">
+      <div class="sim-panel">
+        <div class="sim-label before">✕ WITHOUT AI — Scheduled maintenance, surprise failures</div>
+        <canvas class="sim-canvas" id="maint-before" height="280"></canvas>
+      </div>
+      <div class="sim-panel">
+        <div class="sim-label after">✓ WITH AI — 30-day advance failure warning</div>
+        <canvas class="sim-canvas" id="maint-after" height="280"></canvas>
+      </div>
+    </div>
+
+    <div class="what-box">
+      <h4>WHAT THIS MEANS FOR THE ARMY</h4>
+      <p>A T-80 tank engine has 200+ sensors measuring temperature, vibration, oil pressure. Today we follow a fixed maintenance schedule regardless of actual wear. AI reads all 200 sensors in real time and says: "Engine #47 will fail in 23 days — replace bearing now." The tank never breaks down in the field. Maintenance cost drops 40% because we only fix what actually needs fixing.</p>
+    </div>
+
+    <div class="impact-row">
+      <div class="impact-card g"><div class="impact-num">30 days</div><div class="impact-txt">Advance failure warning</div><div class="impact-sub">Fix it before it breaks</div></div>
+      <div class="impact-card a"><div class="impact-num">40%</div><div class="impact-txt">Maintenance cost reduction</div><div class="impact-sub">Rs.400M saved annually on fleet</div></div>
+      <div class="impact-card b"><div class="impact-num">99%</div><div class="impact-txt">Mission readiness rate</div><div class="impact-sub">No more surprise field failures</div></div>
+      <div class="impact-card r"><div class="impact-num">200+</div><div class="impact-txt">Sensors per platform</div><div class="impact-sub">AI monitors all simultaneously</div></div>
+    </div>
+
+    <div style="margin-top:.5rem">
+      <span class="tag tag-g">T-80 Tanks</span>
+      <span class="tag tag-g">Mi-17 Helicopters</span>
+      <span class="tag tag-a">F-7PG Aircraft</span>
+      <span class="tag tag-b">ARL Partnership</span>
+      <span class="tag tag-b">Ready in 9 Months</span>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- APPLICATION 3: LOGISTICS -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section id="logistics">
+  <div class="sec-label">APPLICATION 03 / 05</div>
+  <h2 class="sec-title">Logistics & Supply Chain AI</h2>
+  <p class="sec-desc">AI tracks every ammunition crate, fuel drum, and medical kit across all depots — and automatically calculates the fastest route to get supplies where they're needed.</p>
+
+  <div class="app-block reveal">
+    <div class="sim-wrap">
+      <div class="sim-panel">
+        <div class="sim-label before">✕ WITHOUT AI — Manual inventory, delayed resupply</div>
+        <canvas class="sim-canvas" id="log-before" height="280"></canvas>
+      </div>
+      <div class="sim-panel">
+        <div class="sim-label after">✓ WITH AI — Real-time inventory + optimized routing</div>
+        <canvas class="sim-canvas" id="log-after" height="280"></canvas>
+      </div>
+    </div>
+
+    <div class="what-box">
+      <h4>WHAT THIS MEANS FOR THE ARMY</h4>
+      <p>Today, a battalion commander calls the depot and waits hours to find out if the spare part is in stock. With AI logistics, every item is tracked in real time across all 9 Corps. The system automatically alerts when ammunition stock drops below threshold, calculates the fastest convoy route avoiding flooded roads or security threats, and even predicts future demand based on operational tempo. Resupply time drops from 72 hours to 18 hours.</p>
+    </div>
+
+    <div class="impact-row">
+      <div class="impact-card g"><div class="impact-num">18 hrs</div><div class="impact-txt">Resupply response time</div><div class="impact-sub">Was: 72 hours average</div></div>
+      <div class="impact-card a"><div class="impact-num">100%</div><div class="impact-txt">Inventory visibility</div><div class="impact-sub">Every item tracked in real time</div></div>
+      <div class="impact-card b"><div class="impact-num">25%</div><div class="impact-txt">Fuel cost reduction</div><div class="impact-sub">Optimized convoy routing</div></div>
+      <div class="impact-card r"><div class="impact-num">0</div><div class="impact-txt">Stockout incidents</div><div class="impact-sub">AI predicts shortages 2 weeks ahead</div></div>
+    </div>
+
+    <div style="margin-top:.5rem">
+      <span class="tag tag-g">9 Corps Coverage</span>
+      <span class="tag tag-g">Ammo Tracking</span>
+      <span class="tag tag-a">Fuel Management</span>
+      <span class="tag tag-b">Medical Supplies</span>
+      <span class="tag tag-b">Ready in 15 Months</span>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- APPLICATION 4: CYBER AI -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section id="cyber">
+  <div class="sec-label">APPLICATION 04 / 05</div>
+  <h2 class="sec-title">Cyber Defence AI</h2>
+  <p class="sec-desc">Our digital networks are attacked thousands of times per day. AI monitors every connection in real time and blocks hostile intrusions before they can steal data or disrupt communications.</p>
+
+  <div class="app-block reveal">
+    <div class="sim-wrap">
+      <div class="sim-panel">
+        <div class="sim-label before">✕ WITHOUT AI — Attacks go undetected for hours or days</div>
+        <canvas class="sim-canvas" id="cyber-before" height="280"></canvas>
+      </div>
+      <div class="sim-panel">
+        <div class="sim-label after">✓ WITH AI — Threats neutralised in milliseconds</div>
+        <canvas class="sim-canvas" id="cyber-after" height="280"></canvas>
+      </div>
+    </div>
+
+    <div class="what-box">
+      <h4>WHAT THIS MEANS FOR THE ARMY</h4>
+      <p>Pakistan Army networks face over 10,000 intrusion attempts monthly. Today, a cyber team of 20 people monitors alerts manually — most threats are caught only after damage is done. AI monitors every packet of data crossing the network. If it spots unusual behaviour — a computer sending data at 3am, login attempts from an unknown location — it automatically blocks the connection and alerts the officer in charge within 0.3 seconds. The network is protected whether the team is sleeping or not.</p>
+    </div>
+
+    <div class="impact-row">
+      <div class="impact-card g"><div class="impact-num">0.3 sec</div><div class="impact-txt">Threat response time</div><div class="impact-sub">Was: hours of human review</div></div>
+      <div class="impact-card a"><div class="impact-num">99.7%</div><div class="impact-txt">Intrusion block rate</div><div class="impact-sub">Benchmarked against NATO standards</div></div>
+      <div class="impact-card b"><div class="impact-num">10,000+</div><div class="impact-txt">Attacks/month monitored</div><div class="impact-sub">All handled automatically</div></div>
+      <div class="impact-card r"><div class="impact-num">0</div><div class="impact-txt">Data breaches expected</div><div class="impact-sub">Classified data stays classified</div></div>
+    </div>
+
+    <div style="margin-top:.5rem">
+      <span class="tag tag-g">Army Networks</span>
+      <span class="tag tag-g">COMSAT Protection</span>
+      <span class="tag tag-a">Signals Corps</span>
+      <span class="tag tag-b">ISI Partnership</span>
+      <span class="tag tag-r">High Priority</span>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- APPLICATION 5: SIMULATOR AI -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section id="simulator">
+  <div class="sec-label">APPLICATION 05 / 05</div>
+  <h2 class="sec-title">Intelligent Simulator Red Force AI</h2>
+  <p class="sec-desc">AI plays the enemy in training simulations — making unpredictable, realistic tactical decisions that challenge our soldiers far more than scripted scenarios.</p>
+
+  <div class="app-block reveal">
+    <div class="sim-wrap">
+      <div class="sim-panel">
+        <div class="sim-label before">✕ WITHOUT AI — Scripted enemy, predictable patterns</div>
+        <canvas class="sim-canvas" id="sim-before" height="280"></canvas>
+      </div>
+      <div class="sim-panel">
+        <div class="sim-label after">✓ WITH AI — Dynamic enemy adapts to every decision</div>
+        <canvas class="sim-canvas" id="sim-after" height="280"></canvas>
+      </div>
+    </div>
+
+    <div class="what-box">
+      <h4>WHAT THIS MEANS FOR THE ARMY</h4>
+      <p>In current battle simulations, the "enemy" follows a fixed script — soldiers learn the pattern and pass easily. AI red force learns from each encounter. If our soldiers flank left every time, the AI starts guarding the left flank. It studies the same tactics used in Ukraine, Gaza, and Ladakh and employs them against our trainees. Soldiers graduate from training having faced a smarter opponent than any human trainer could provide. Battle readiness improves dramatically.</p>
+    </div>
+
+    <div class="impact-row">
+      <div class="impact-card g"><div class="impact-num">10×</div><div class="impact-txt">Training scenario variety</div><div class="impact-sub">No two simulations identical</div></div>
+      <div class="impact-card a"><div class="impact-num">60%</div><div class="impact-txt">Decision quality improvement</div><div class="impact-sub">Measured in post-training exercises</div></div>
+      <div class="impact-card b"><div class="impact-num">AWC</div><div class="impact-txt">Army War College ready</div><div class="impact-sub">Existing simulators can be upgraded</div></div>
+      <div class="impact-card r"><div class="impact-num">0</div><div class="impact-txt">Ammunition cost</div><div class="impact-sub">All training is virtual, no live rounds</div></div>
+    </div>
+
+    <div style="margin-top:.5rem">
+      <span class="tag tag-g">AWC Quetta</span>
+      <span class="tag tag-g">Command &amp; Staff College</span>
+      <span class="tag tag-a">Tank Crew Training</span>
+      <span class="tag tag-b">Infantry Tactics</span>
+      <span class="tag tag-b">Ready in 18 Months</span>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- OVERALL IMPACT -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section id="impact">
+  <div class="sec-label">SUMMARY</div>
+  <h2 class="sec-title">The Overall Transformation</h2>
+  <p class="sec-desc">By the end of Year 1, Pakistan Army will have fundamentally changed how it sees, decides, and acts. This is what that means at the top level.</p>
+
+  <div class="impact-grid reveal">
+    <div class="big-impact-card">
+      <span class="bi-icon">👁</span>
+      <div class="bi-title">BETTER EYES</div>
+      <div class="bi-desc">We see threats faster and more completely than ever before — covering 50× more ground with the same number of personnel.</div>
+    </div>
+    <div class="big-impact-card">
+      <span class="bi-icon">⚡</span>
+      <div class="bi-title">FASTER DECISIONS</div>
+      <div class="bi-desc">Information goes from sensor to commander in seconds instead of hours. The decision cycle accelerates — and in modern warfare, speed wins.</div>
+    </div>
+    <div class="big-impact-card">
+      <span class="bi-icon">🛡</span>
+      <div class="bi-title">FEWER SURPRISES</div>
+      <div class="bi-desc">Predictive AI warns us before equipment fails, before cyber attacks land, and before supply shortages hit — we stop reacting and start anticipating.</div>
+    </div>
+    <div class="big-impact-card">
+      <span class="bi-icon">💰</span>
+      <div class="bi-title">BETTER VALUE</div>
+      <div class="bi-desc">Rs.800 crore invested in Phase 1 saves an estimated Rs.2,400 crore in the first 5 years through efficiency gains and prevented failures.</div>
+    </div>
+    <div class="big-impact-card">
+      <span class="bi-icon">🎓</span>
+      <div class="bi-title">SMARTER SOLDIERS</div>
+      <div class="bi-desc">Training becomes more challenging and realistic. Every soldier that passes through AWC trains against an AI that thinks like the best enemy commanders in history.</div>
+    </div>
+    <div class="big-impact-card">
+      <span class="bi-icon">🌍</span>
+      <div class="bi-title">STRATEGIC POSITION</div>
+      <div class="bi-desc">Pakistan joins Turkey, UAE, and India as a regional military AI power — increasing deterrence and opening bilateral cooperation opportunities.</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- 90-DAY TIMELINE -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section id="timeline">
+  <div class="sec-label">EXECUTION PLAN</div>
+  <h2 class="sec-title">First 90 Days — Concrete Actions</h2>
+  <p class="sec-desc">This is not a plan for the future. These are specific actions that begin the week of approval.</p>
+
+  <div class="timeline reveal">
+    <div class="t-item">
+      <div class="t-month">WEEK 1–2</div>
+      <div class="t-title">Establish AI Directorate Office</div>
+      <div class="t-desc">Designate DG AI (Brig level). Identify 10 officers for AI Cell. Secure a budget line. Office space at GHQ or NDU Islamabad.</div>
+    </div>
+    <div class="t-item">
+      <div class="t-month">WEEK 3–4</div>
+      <div class="t-title">Sign NUST & FAST Partnerships</div>
+      <div class="t-desc">MOUs with NUST School of Electrical Engineering and FAST NUCES. These universities already have the AI researchers we need. Cost: zero — they want to partner.</div>
+    </div>
+    <div class="t-item">
+      <div class="t-month">MONTH 2</div>
+      <div class="t-title">Launch Predictive Maintenance Pilot</div>
+      <div class="t-desc">Fit 20 T-80 tanks with sensor packages at 1 Corps Mangla. Run for 90 days collecting baseline data. This is the fastest application to demonstrate ROI.</div>
+    </div>
+    <div class="t-item">
+      <div class="t-month">MONTH 2</div>
+      <div class="t-title">ISR AI Proof of Concept</div>
+      <div class="t-desc">Take 30 days of existing Shahpar-II footage from border ops. Have NUST AI team build detection algorithm. Demo to CAS/COAS within 60 days.</div>
+    </div>
+    <div class="t-item">
+      <div class="t-month">MONTH 3</div>
+      <div class="t-title">First AI Officer Training Cohort</div>
+      <div class="t-desc">Send 15 officers (Major/Lt Col level with engineering degrees) to a 6-week AI fundamentals course at NUST. These become the core of the Directorate.</div>
+    </div>
+    <div class="t-item">
+      <div class="t-month">MONTH 3</div>
+      <div class="t-title">Cyber AI Baseline Assessment</div>
+      <div class="t-desc">Audit current network monitoring capabilities. Procure AI-powered Security Operations Centre (SOC) platform. Begin deployment at Army Signal Corps Rawalpindi.</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CTA -->
+<section>
+  <div class="cta-box reveal">
+    <h2>Pakistan Army AI — The Time is Now</h2>
+    <p>India launched iDEX in 2018. Turkey's TB2 became a global product by 2020. UAE's EDGE Group was formed in 2019. Every year we delay, the gap grows. Every year we move, the gap closes.</p>
+    <a href="index.html" class="btn-primary">VIEW FULL TECHNICAL ROADMAP →</a>
+  </div>
+</section>
+
+<footer>
+  PAKISTAN ARMY AI DIRECTORATE — EXECUTIVE BRIEFING // CONCEPT DOCUMENT // NOT FOR DISTRIBUTION<br>
+  <span style="margin-top:.5rem;display:block">Prepared for COAS Review — 2026</span>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- JAVASCRIPT -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<script>
+// ─── COLOURS ───
+const G='#01d96b',A='#ff8c00',B='#00c3ff',R='#ff3355',DIM='#5a7a8a',BG='#020c14',S1='#040f1c',S2='#071626';
+
+// ─── LOADER ───
+(function(){
+  const c=document.getElementById('loader-canvas'),ctx=c.getContext('2d');
+  let ang=0,dots=[];
+  for(let i=0;i<60;i++) dots.push({a:Math.random()*Math.PI*2,r:30+Math.random()*60,v:.003+Math.random()*.01,alpha:Math.random()*.6+.2});
+  function frame(){
+    ctx.clearRect(0,0,200,200);
+    const cx=100,cy=100;
+    // rings
+    [30,55,80,100].forEach(r=>{
+      ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);
+      ctx.strokeStyle='rgba(1,217,107,0.12)';ctx.lineWidth=1;ctx.stroke();
+    });
+    // crosshairs
+    ctx.strokeStyle='rgba(1,217,107,0.15)';ctx.lineWidth=.5;
+    ctx.beginPath();ctx.moveTo(cx-105,cy);ctx.lineTo(cx+105,cy);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(cx,cy-105);ctx.lineTo(cx,cy+105);ctx.stroke();
+    // sweep
+    const g=ctx.createConicalGradient?null:null;
+    ctx.save();ctx.beginPath();ctx.moveTo(cx,cy);
+    ctx.arc(cx,cy,100,ang,ang+1.2);ctx.closePath();
+    const gr=ctx.createRadialGradient(cx,cy,0,cx,cy,100);
+    gr.addColorStop(0,'rgba(1,217,107,0.5)');gr.addColorStop(1,'rgba(1,217,107,0)');
+    ctx.fillStyle=gr;ctx.fill();ctx.restore();
+    // dots
+    dots.forEach(d=>{
+      d.a+=d.v;
+      const x=cx+Math.cos(d.a)*d.r,y=cy+Math.sin(d.a)*d.r;
+      ctx.beginPath();ctx.arc(x,y,1.5,0,Math.PI*2);
+      ctx.fillStyle=`rgba(1,217,107,${d.alpha})`;ctx.fill();
+    });
+    // center
+    ctx.beginPath();ctx.arc(cx,cy,4,0,Math.PI*2);
+    ctx.fillStyle=G;ctx.fill();
+    ctx.beginPath();ctx.arc(cx,cy,8,0,Math.PI*2);
+    ctx.strokeStyle='rgba(1,217,107,0.4)';ctx.lineWidth=1;ctx.stroke();
+    ang+=.03;
+    requestAnimationFrame(frame);
+  }
+  frame();
+  setTimeout(()=>{
+    const L=document.getElementById('loader');
+    L.style.transition='opacity .6s ease';L.style.opacity='0';
+    setTimeout(()=>L.style.display='none',600);
+  },1800);
+})();
+
+// ─── SCROLL PROGRESS ───
+const prog=document.getElementById('scroll-prog');
+document.addEventListener('scroll',()=>{
+  const doc=document.documentElement;
+  const pct=(doc.scrollTop/(doc.scrollHeight-doc.clientHeight))*100;
+  prog.style.width=pct+'%';
+});
+
+// ─── COUNTER ANIMATION ───
+function animateCounter(el){
+  if(el.dataset.counted)return;el.dataset.counted='1';
+  const target=+el.dataset.count,dur=1800;
+  const start=performance.now();
+  function tick(now){
+    const t=Math.min(1,(now-start)/dur);
+    const ease=1-Math.pow(1-t,3);
+    el.textContent=Math.round(ease*target);
+    if(t<1)requestAnimationFrame(tick);else el.textContent=target;
+  }
+  requestAnimationFrame(tick);
+}
+const cObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.querySelectorAll('[data-count]').forEach(animateCounter);});
+},{threshold:0.5});
+document.querySelectorAll('#hero-stats').forEach(el=>cObs.observe(el));
+
+// ─── REVEAL ON SCROLL ───
+const revObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');});
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>revObs.observe(el));
+
+// ═══════════════════════════════════════════════════════════════
+// CANVAS SIMULATIONS
+// ═══════════════════════════════════════════════════════════════
+
+function setSize(c){c.width=c.parentElement.offsetWidth;return c.width;}
+
+// ─── ISR BEFORE: single feed, slow manual scan ───
+(function(){
+  const c=document.getElementById('isr-before');
+  c.width=setSize(c);c.height=280;
+  const ctx=c.getContext('2d');
+  let scanY=0,t=0;
+  const W=c.width,H=c.height;
+  // terrain blobs
+  const terrain=[];
+  for(let i=0;i<12;i++) terrain.push({x:Math.random()*W,y:Math.random()*H,r:15+Math.random()*30,c:`rgba(${30+Math.floor(Math.random()*20)},${50+Math.floor(Math.random()*20)},${30+Math.floor(Math.random()*10)},0.5)`});
+  // a hidden target that won't be found
+  const target={x:W*.7,y:H*.6,found:false};
+  // analyst cursor
+  let curX=W*.1,curY=H*.1;
+  let lookPhase=0,phaseTimer=0;
+  function frame(){
+    ctx.fillStyle=S1;ctx.fillRect(0,0,W,H);
+    // terrain
+    terrain.forEach(b=>{ctx.beginPath();ctx.arc(b.x,b.y,b.r,0,Math.PI*2);ctx.fillStyle=b.c;ctx.fill();});
+    // roads
+    ctx.strokeStyle='rgba(100,80,40,0.4)';ctx.lineWidth=2;
+    ctx.beginPath();ctx.moveTo(0,H*.4);ctx.bezierCurveTo(W*.3,H*.35,W*.6,H*.45,W,H*.5);ctx.stroke();
+    // grid overlay (thermal cam look)
+    ctx.strokeStyle='rgba(0,195,255,0.05)';ctx.lineWidth=.5;
+    for(let x=0;x<W;x+=40){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}
+    for(let y=0;y<H;y+=40){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
+    // hidden vehicle (dim)
+    ctx.fillStyle='rgba(120,100,60,0.6)';
+    ctx.fillRect(target.x-8,target.y-5,16,10);
+    ctx.fillStyle='rgba(150,120,70,0.4)';
+    ctx.fillRect(target.x-4,target.y-5,6,5);
+    // manual scan line (analyst looking)
+    phaseTimer++;
+    if(phaseTimer>80){phaseTimer=0;lookPhase=(lookPhase+1)%4;}
+    const lx=[W*.1,W*.5,W*.2,W*.8][lookPhase];
+    const ly=[H*.2,H*.3,H*.7,H*.5][lookPhase];
+    curX+=(lx-curX)*.04;curY+=(ly-curY)*.04;
+    // analyst magnifier
+    ctx.save();ctx.beginPath();ctx.arc(curX,curY,25,0,Math.PI*2);ctx.clip();
+    ctx.fillStyle='rgba(0,195,255,0.06)';ctx.fillRect(0,0,W,H);ctx.restore();
+    ctx.beginPath();ctx.arc(curX,curY,25,0,Math.PI*2);
+    ctx.strokeStyle='rgba(0,195,255,0.5)';ctx.lineWidth=1.5;ctx.stroke();
+    ctx.beginPath();ctx.moveTo(curX-30,curY);ctx.lineTo(curX+30,curY);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(curX,curY-30);ctx.lineTo(curX,curY+30);ctx.stroke();
+    // timer label
+    t++;
+    const secs=Math.floor(t/30);
+    ctx.fillStyle=R;ctx.font='bold 11px monospace';
+    ctx.fillText(`ANALYST REVIEW: ${String(Math.floor(secs/60)).padStart(2,'0')}:${String(secs%60).padStart(2,'0')} ELAPSED`,10,20);
+    ctx.fillStyle=DIM;ctx.font='10px monospace';
+    ctx.fillText('FEED 1/1 — THREAT: NOT DETECTED',10,35);
+    requestAnimationFrame(frame);
+  }
+  frame();
+})();
+
+// ─── ISR AFTER: multi-feed, AI boxes threats instantly ───
+(function(){
+  const c=document.getElementById('isr-after');
+  c.width=setSize(c);c.height=280;
+  const ctx=c.getContext('2d');
+  const W=c.width,H=c.height;
+  let t=0;
+  // 4 mini feeds in a grid
+  const feeds=[
+    {x:0,y:0,w:W/2,h:H/2,targets:[{x:.6,y:.5,found:false,ft:20}]},
+    {x:W/2,y:0,w:W/2,h:H/2,targets:[]},
+    {x:0,y:H/2,w:W/2,h:H/2,targets:[{x:.4,y:.6,found:false,ft:45}]},
+    {x:W/2,y:H/2,w:W/2,h:H/2,targets:[]},
+  ];
+  const terrains=feeds.map(()=>{
+    const a=[];for(let i=0;i<6;i++)a.push({x:Math.random(),y:Math.random(),r:10+Math.random()*20});return a;
+  });
+  function drawFeed(f,ti){
+    const fw=f.w-2,fh=f.h-2;
+    ctx.save();ctx.rect(f.x+1,f.y+1,fw-2,fh-2);ctx.clip();
+    ctx.fillStyle=S1;ctx.fillRect(f.x,f.y,fw,fh);
+    terrains[ti].forEach(b=>{
+      ctx.beginPath();ctx.arc(f.x+b.x*fw,f.y+b.y*fh,b.r,0,Math.PI*2);
+      ctx.fillStyle='rgba(30,50,25,0.5)';ctx.fill();
+    });
+    // road
+    ctx.strokeStyle='rgba(80,60,30,0.4)';ctx.lineWidth=1.5;
+    ctx.beginPath();ctx.moveTo(f.x,f.y+fh*.5);ctx.lineTo(f.x+fw,f.y+fh*.4);ctx.stroke();
+    f.targets.forEach(tgt=>{
+      const tx=f.x+tgt.x*fw,ty=f.y+tgt.y*fh;
+      // vehicle
+      ctx.fillStyle='rgba(120,100,60,0.7)';ctx.fillRect(tx-8,ty-5,16,10);
+      if(t>=tgt.ft && !tgt.found){tgt.found=true;}
+      if(tgt.found){
+        const pulse=.5+.5*Math.sin(t*.1);
+        ctx.strokeStyle=G;ctx.lineWidth=1.5+pulse;
+        ctx.strokeRect(tx-14,ty-10,28,20);
+        ctx.fillStyle=G;ctx.font='bold 9px monospace';
+        ctx.fillText('VEH',tx-8,ty-13);
+        ctx.fillStyle=`rgba(1,217,107,${.1+.1*pulse})`;
+        ctx.fillRect(tx-14,ty-10,28,20);
+      }
+    });
+    ctx.restore();
+    // border
+    const hasThreat=f.targets.some(t2=>t2.found);
+    ctx.strokeStyle=hasThreat?G:'rgba(1,217,107,0.2)';ctx.lineWidth=hasThreat?2:1;
+    ctx.strokeRect(f.x+1,f.y+1,fw-2,fh-2);
+    ctx.fillStyle=hasThreat?G:DIM;ctx.font='8px monospace';
+    ctx.fillText(`FEED ${ti+1}${hasThreat?' ⚠ THREAT':' CLEAR'}`,f.x+5,f.y+12);
+  }
+  function frame(){
+    ctx.fillStyle=BG;ctx.fillRect(0,0,W,H);
+    feeds.forEach((f,i)=>drawFeed(f,i));
+    // divider lines
+    ctx.strokeStyle='rgba(1,217,107,0.3)';ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(W/2,0);ctx.lineTo(W/2,H);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(0,H/2);ctx.lineTo(W,H/2);ctx.stroke();
+    // header
+    t++;
+    const threatsFound=feeds.reduce((a,f)=>a+f.targets.filter(x=>x.found).length,0);
+    ctx.fillStyle=G;ctx.font='bold 11px monospace';
+    ctx.fillText(`AI MONITORING: 4 FEEDS SIMULTANEOUSLY — THREATS DETECTED: ${threatsFound}`,4,H-6);
+    requestAnimationFrame(frame);
+  }
+  frame();
+})();
+
+// ─── MAINTENANCE BEFORE: sudden red failure ───
+(function(){
+  const c=document.getElementById('maint-before');
+  c.width=setSize(c);c.height=280;
+  const ctx=c.getContext('2d');
+  const W=c.width,H=c.height;
+  let t=0,failed=false,failT=200;
+  // sensors all at "OK" - no warning
+  const sensors=[
+    {name:'OIL PRESSURE',val:85,limit:20,y:.25},
+    {name:'TEMP °C',val:78,limit:120,y:.45},
+    {name:'VIBRATION',val:42,limit:80,y:.65},
+    {name:'BEARING WEAR',val:91,limit:100,y:.85},
+  ];
+  function frame(){
+    ctx.fillStyle=S1;ctx.fillRect(0,0,W,H);
+    t++;
+    if(t>failT){failed=true;}
+    // tank silhouette
+    const tx=W*.5,ty=H*.12;
+    ctx.fillStyle='rgba(60,70,50,0.7)';
+    ctx.fillRect(tx-50,ty,100,25);// hull
+    ctx.fillRect(tx-30,ty-15,60,20);// turret
+    ctx.fillRect(tx+10,ty-25,25,12);// barrel
+    ctx.fillStyle='rgba(40,50,35,0.8)';
+    for(let i=0;i<5;i++){ctx.beginPath();ctx.arc(tx-40+i*20,ty+25,8,0,Math.PI*2);ctx.fill();}
+    ctx.fillStyle='#fff';ctx.font='9px monospace';ctx.fillText('T-80 UNIT #47',tx-40,ty-28);
+    if(failed){
+      // red flash
+      const flicker=Math.sin(t*.3)>.3;
+      if(flicker){ctx.fillStyle='rgba(255,51,85,0.15)';ctx.fillRect(0,0,W,H);}
+      ctx.fillStyle=R;ctx.font='bold 16px monospace';
+      ctx.fillText('⚠ ENGINE FAILURE',tx-90,H*.5);
+      ctx.fillStyle='rgba(255,51,85,0.7)';ctx.font='11px monospace';
+      ctx.fillText('MISSION ABORT — UNIT IMMOBILIZED',tx-110,H*.5+20);
+      ctx.fillText('RECOVERY TEAM DISPATCHED: ETA 4 HRS',tx-110,H*.5+36);
+    } else {
+      // all green bars — no warning (false sense of security)
+      sensors.forEach(s=>{
+        const y=s.y*H,bw=W*.45,bh=12;
+        ctx.fillStyle='rgba(255,255,255,0.05)';ctx.fillRect(W*.42,y-6,bw,bh);
+        const pct=Math.min(1,s.val/100);
+        ctx.fillStyle='rgba(1,217,107,0.7)';ctx.fillRect(W*.42,y-6,bw*pct,bh);
+        ctx.fillStyle='#aaa';ctx.font='9px monospace';
+        ctx.fillText(s.name,10,y+2);
+        ctx.fillStyle='#fff';ctx.fillText(s.val+'%',W*.42+bw+5,y+2);
+      });
+      ctx.fillStyle=G;ctx.font='bold 11px monospace';ctx.fillText('STATUS: ALL SYSTEMS NORMAL',10,H-8);
+      // countdown
+      const rem=Math.max(0,Math.ceil((failT-t)/30));
+      ctx.fillStyle=DIM;ctx.font='9px monospace';
+      ctx.fillText(`TIME TO FAILURE: UNKNOWN (${rem}s in sim)`,W*.42,H-8);
+    }
+    requestAnimationFrame(frame);
+  }
+  frame();
+})();
+
+// ─── MAINTENANCE AFTER: AI predicts failure with countdown ───
+(function(){
+  const c=document.getElementById('maint-after');
+  c.width=setSize(c);c.height=280;
+  const ctx=c.getContext('2d');
+  const W=c.width,H=c.height;
+  let t=0;
+  const sensors=[
+    {name:'OIL PRESSURE',val:85,trend:-0.08,warn:40},
+    {name:'TEMP °C',val:78,trend:0.04,warn:85},
+    {name:'VIBRATION',val:42,trend:0.12,warn:65},
+    {name:'BEARING WEAR',val:91,trend:0.06,warn:95},
+  ];
+  let alerted=false,alertT=120;
+  function frame(){
+    ctx.fillStyle=S1;ctx.fillRect(0,0,W,H);
+    t++;
+    // update sensor values
+    sensors.forEach(s=>{s.val=Math.max(0,Math.min(100,s.val+s.trend*.1+(Math.random()-.5)*.5));});
+    // tank silhouette
+    const tx=W*.5,ty=H*.1;
+    ctx.fillStyle='rgba(60,70,50,0.7)';
+    ctx.fillRect(tx-50,ty,100,25);
+    ctx.fillRect(tx-30,ty-15,60,20);
+    ctx.fillRect(tx+10,ty-25,25,12);
+    ctx.fillStyle='rgba(40,50,35,0.8)';
+    for(let i=0;i<5;i++){ctx.beginPath();ctx.arc(tx-40+i*20,ty+25,8,0,Math.PI*2);ctx.fill();}
+    // AI label
+    ctx.fillStyle=G;ctx.font='9px monospace';ctx.fillText('AI MONITORING ACTIVE',tx-55,ty-30);
+    // sensor bars
+    sensors.forEach((s,i)=>{
+      const y=(.28+i*.16)*H,bw=W*.42,bh=10;
+      const pct=s.val/100;
+      const nearWarn=s.val>s.warn*.85;
+      const barColor=s.val>=s.warn?R:nearWarn?A:G;
+      ctx.fillStyle='rgba(255,255,255,0.05)';ctx.fillRect(W*.45,y-5,bw,bh);
+      ctx.fillStyle=barColor+'bb';ctx.fillRect(W*.45,y-5,bw*pct,bh);
+      // warn threshold line
+      ctx.strokeStyle='rgba(255,140,0,0.6)';ctx.lineWidth=1;ctx.setLineDash([3,3]);
+      const wx=W*.45+bw*(s.warn/100);
+      ctx.beginPath();ctx.moveTo(wx,y-8);ctx.lineTo(wx,y+bh+2);ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle='#aaa';ctx.font='8px monospace';ctx.fillText(s.name,5,y+2);
+      ctx.fillStyle=barColor;ctx.fillText(s.val.toFixed(0)+'%',W*.45+bw+4,y+2);
+    });
+    // AI warning if bearing wear close
+    if(sensors[3].val>sensors[3].warn*.8){
+      alerted=true;
+      const pulse=.7+.3*Math.sin(t*.08);
+      ctx.fillStyle=`rgba(255,140,0,${pulse})`;ctx.font='bold 11px monospace';
+      ctx.fillText('⚠ AI ALERT: BEARING WEAR CRITICAL',10,H-32);
+      ctx.fillStyle=G;ctx.font='10px monospace';
+      ctx.fillText('PREDICTED FAILURE: 23–30 DAYS',10,H-18);
+      ctx.fillText('RECOMMENDED: REPLACE BEARING NOW',10,H-6);
+    } else {
+      ctx.fillStyle=G;ctx.font='bold 10px monospace';
+      ctx.fillText('AI STATUS: NOMINAL — MONITORING 200+ SENSORS',10,H-6);
+    }
+    // warn line label
+    const bwLabel=W*.42;
+    ctx.fillStyle=A;ctx.font='7px monospace';ctx.fillText('WARN',W*.45+bwLabel*sensors[3].warn/100-8,H*.83-8);
+    requestAnimationFrame(frame);
+  }
+  frame();
+})();
+
+// ─── LOGISTICS BEFORE: static map, manual update ───
+(function(){
+  const c=document.getElementById('log-before');
+  c.width=setSize(c);c.height=280;
+  const ctx=c.getContext('2d');
+  const W=c.width,H=c.height;
+  let t=0;
+  // Pakistan rough outline with major cities
+  const depots=[
+    {x:.15,y:.25,name:'Peshawar',stock:80},{x:.4,y:.35,name:'Islamabad',stock:12},
+    {x:.55,y:.45,name:'Lahore',stock:65},{x:.3,y:.6,name:'Quetta',stock:30},
+    {x:.6,y:.75,name:'Karachi',stock:90},{x:.5,y:.55,name:'Multan',stock:45},
+  ];
+  function frame(){
+    ctx.fillStyle=S1;ctx.fillRect(0,0,W,H);
+    t++;
+    // draw routes (grey, slow truck animation)
+    depots.forEach((d,i)=>{
+      if(i>0){
+        const prev=depots[i-1];
+        ctx.strokeStyle='rgba(90,122,138,0.3)';ctx.lineWidth=1.5;ctx.setLineDash([4,4]);
+        ctx.beginPath();ctx.moveTo(prev.x*W,prev.y*H);ctx.lineTo(d.x*W,d.y*H);ctx.stroke();
+        ctx.setLineDash([]);
+        // slow truck
+        const prog=((t*.002+i*.2)%1);
+        const tx=prev.x*W+(d.x*W-prev.x*W)*prog;
+        const ty=prev.y*H+(d.y*H-prev.y*H)*prog;
+        ctx.fillStyle=DIM;ctx.fillRect(tx-4,ty-3,8,6);
+      }
+    });
+    // depot nodes
+    depots.forEach(d=>{
+      const low=d.stock<30;
+      ctx.beginPath();ctx.arc(d.x*W,d.y*H,10,0,Math.PI*2);
+      ctx.fillStyle=low?'rgba(255,51,85,0.3)':'rgba(90,122,138,0.3)';ctx.fill();
+      ctx.strokeStyle=low?R:DIM;ctx.lineWidth=1.5;ctx.stroke();
+      ctx.fillStyle=low?R:'#aaa';ctx.font='bold 9px monospace';
+      ctx.fillText(d.stock+'%',d.x*W-8,d.y*H+3);
+      ctx.fillStyle='#777';ctx.font='8px monospace';
+      ctx.fillText(d.name,d.x*W-20,d.y*H+18);
+    });
+    ctx.fillStyle=R;ctx.font='bold 10px monospace';
+    ctx.fillText('⚠ ISLAMABAD DEPOT: 12% — CRITICAL LOW',10,H-20);
+    ctx.fillStyle=DIM;ctx.font='9px monospace';
+    ctx.fillText('MANUAL REQUEST SUBMITTED — ETA: 72 HOURS',10,H-7);
+    requestAnimationFrame(frame);
+  }
+  frame();
+})();
+
+// ─── LOGISTICS AFTER: AI routing, optimized supply ───
+(function(){
+  const c=document.getElementById('log-after');
+  c.width=setSize(c);c.height=280;
+  const ctx=c.getContext('2d');
+  const W=c.width,H=c.height;
+  let t=0;
+  const depots=[
+    {x:.15,y:.25,name:'Peshawar',stock:80},{x:.4,y:.35,name:'Islamabad',stock:12},
+    {x:.55,y:.45,name:'Lahore',stock:65},{x:.3,y:.6,name:'Quetta',stock:30},
+    {x:.6,y:.75,name:'Karachi',stock:90},{x:.5,y:.55,name:'Multan',stock:45},
+  ];
+  // AI identified best route: Lahore→Islamabad (shortest)
+  const bestRoute=[{x:.55,y:.45},{x:.4,y:.35}];
+  function frame(){
+    ctx.fillStyle=S1;ctx.fillRect(0,0,W,H);
+    t++;
+    // all routes dim
+    depots.forEach((d,i)=>{
+      if(i>0){
+        const prev=depots[i-1];
+        ctx.strokeStyle='rgba(90,122,138,0.15)';ctx.lineWidth=1;ctx.setLineDash([3,5]);
+        ctx.beginPath();ctx.moveTo(prev.x*W,prev.y*H);ctx.lineTo(d.x*W,d.y*H);ctx.stroke();
+        ctx.setLineDash([]);
+      }
+    });
+    // AI optimized route (Lahore→Islamabad)
+    const prog=((t*.008)%1);
+    const pulse=.4+.6*Math.sin(t*.06);
+    ctx.strokeStyle=`rgba(1,217,107,${.4+.2*Math.sin(t*.05)})`;ctx.lineWidth=3;
+    ctx.beginPath();ctx.moveTo(bestRoute[0].x*W,bestRoute[0].y*H);ctx.lineTo(bestRoute[1].x*W,bestRoute[1].y*H);ctx.stroke();
+    // fast truck on route
+    const tx=bestRoute[0].x*W+(bestRoute[1].x*W-bestRoute[0].x*W)*prog;
+    const ty=bestRoute[0].y*H+(bestRoute[1].y*H-bestRoute[0].y*H)*prog;
+    ctx.fillStyle=G;ctx.fillRect(tx-5,ty-4,10,8);
+    // animated glow on truck
+    ctx.beginPath();ctx.arc(tx,ty,10,0,Math.PI*2);
+    ctx.fillStyle=`rgba(1,217,107,${.05*pulse})`;ctx.fill();
+    // depot nodes with AI stock levels
+    depots.forEach(d=>{
+      const low=d.stock<30;
+      const glow=low?R:G;
+      ctx.beginPath();ctx.arc(d.x*W,d.y*H,10,0,Math.PI*2);
+      ctx.fillStyle=low?'rgba(255,51,85,0.2)':'rgba(1,217,107,0.15)';ctx.fill();
+      ctx.strokeStyle=glow;ctx.lineWidth=1.5;ctx.stroke();
+      // glow ring for low
+      if(low){
+        ctx.beginPath();ctx.arc(d.x*W,d.y*H,14+2*Math.sin(t*.1),0,Math.PI*2);
+        ctx.strokeStyle=`rgba(255,51,85,${.3*pulse})`;ctx.lineWidth=2;ctx.stroke();
+      }
+      ctx.fillStyle=low?R:G;ctx.font='bold 9px monospace';
+      ctx.fillText(d.stock+'%',d.x*W-8,d.y*H+3);
+      ctx.fillStyle='#aaa';ctx.font='8px monospace';
+      ctx.fillText(d.name,d.x*W-20,d.y*H+18);
+    });
+    // AI status
+    ctx.fillStyle=G;ctx.font='bold 10px monospace';
+    ctx.fillText('AI ALERT: ISLAMABAD DEPOT LOW — AUTO-REROUTING',10,H-20);
+    ctx.fillStyle=G;ctx.font='9px monospace';
+    ctx.fillText('LAHORE → ISLAMABAD: FASTEST ROUTE — ETA: 18 HRS',10,H-7);
+    requestAnimationFrame(frame);
+  }
+  frame();
+})();
+
+// ─── CYBER BEFORE: attack packets reaching server ───
+(function(){
+  const c=document.getElementById('cyber-before');
+  c.width=setSize(c);c.height=280;
+  const ctx=c.getContext('2d');
+  const W=c.width,H=c.height;
+  let t=0;
+  const packets=[];
+  function spawnPacket(){
+    packets.push({x:0,y:20+Math.random()*(H-40),speed:1.5+Math.random()*2,hostile:Math.random()>.3,size:3+Math.random()*3,hit:false});
+  }
+  function frame(){
+    ctx.fillStyle=S1;ctx.fillRect(0,0,W,H);
+    t++;
+    if(t%8===0)spawnPacket();
+    // server icon (right side)
+    const sx=W-40,sy=H/2;
+    ctx.fillStyle='rgba(90,122,138,0.4)';ctx.fillRect(sx-15,sy-40,30,80);
+    ctx.fillStyle='rgba(0,195,255,0.3)';
+    for(let i=0;i<4;i++){ctx.fillRect(sx-10,sy-30+i*18,20,12);}
+    ctx.fillStyle='#fff';ctx.font='8px monospace';ctx.fillText('SERVER',sx-15,sy+55);
+    let hits=0;
+    // move packets
+    packets.forEach((p,i)=>{
+      p.x+=p.speed;
+      if(p.x>sx-15){
+        if(p.hostile){hits++;p.hit=true;}
+        packets.splice(i,1);return;
+      }
+      ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+      ctx.fillStyle=p.hostile?`rgba(255,51,85,${.5+.5*Math.sin(t*.3)})`:'rgba(0,195,255,0.4)';
+      ctx.fill();
+      if(p.hostile){
+        // hostile trail
+        ctx.strokeStyle='rgba(255,51,85,0.2)';ctx.lineWidth=1;
+        ctx.beginPath();ctx.moveTo(0,p.y);ctx.lineTo(p.x-5,p.y);ctx.stroke();
+      }
+    });
+    // breach flicker
+    if(hits>0){
+      ctx.fillStyle='rgba(255,51,85,0.1)';ctx.fillRect(sx-20,sy-45,40,90);
+    }
+    // analyst alert (slow)
+    const alertTime=Math.floor((t*.5)/30);
+    ctx.fillStyle=R;ctx.font='bold 10px monospace';
+    ctx.fillText(`⚠ INTRUSION DETECTED — ${alertTime} MIN AGO`,10,H-18);
+    ctx.fillStyle=DIM;ctx.font='9px monospace';
+    ctx.fillText('MANUAL REVIEW IN PROGRESS...',10,H-6);
+    requestAnimationFrame(frame);
+  }
+  frame();
+})();
+
+// ─── CYBER AFTER: AI firewall blocks threats instantly ───
+(function(){
+  const c=document.getElementById('cyber-after');
+  c.width=setSize(c);c.height=280;
+  const ctx=c.getContext('2d');
+  const W=c.width,H=c.height;
+  let t=0,blocked=0,passed=0;
+  const packets=[];
+  const wallX=W*.55;
+  function spawnPacket(){
+    packets.push({x:0,y:20+Math.random()*(H-40),speed:2+Math.random()*2.5,hostile:Math.random()>.35,size:3+Math.random()*3,blocked:false,blockX:null,blockY:null,alpha:1});
+  }
+  function frame(){
+    ctx.fillStyle=S1;ctx.fillRect(0,0,W,H);
+    t++;
+    if(t%7===0)spawnPacket();
+    // AI firewall wall
+    const pulse=.3+.15*Math.sin(t*.08);
+    ctx.fillStyle=`rgba(1,217,107,${pulse})`;
+    ctx.fillRect(wallX-2,0,4,H);
+    ctx.fillStyle='rgba(1,217,107,0.06)';ctx.fillRect(wallX-20,0,40,H);
+    ctx.fillStyle=G;ctx.font='bold 9px monospace';
+    ctx.save();ctx.translate(wallX,H/2);ctx.rotate(-Math.PI/2);
+    ctx.fillText('AI FIREWALL',- 38,4);ctx.restore();
+    // server
+    const sx=W-40,sy=H/2;
+    ctx.fillStyle='rgba(1,217,107,0.2)';ctx.fillRect(sx-15,sy-40,30,80);
+    ctx.fillStyle='rgba(1,217,107,0.4)';
+    for(let i=0;i<4;i++){ctx.fillRect(sx-10,sy-30+i*18,20,12);}
+    ctx.fillStyle=G;ctx.font='8px monospace';ctx.fillText('SERVER',sx-15,sy+55);
+    // move packets
+    packets.forEach((p,i)=>{
+      if(p.blocked){
+        p.alpha-=.05;
+        const ex=p.blockX,ey=p.blockY;
+        for(let j=0;j<3;j++){
+          ctx.beginPath();ctx.arc(ex+Math.random()*20-10,ey+Math.random()*20-10,2,0,Math.PI*2);
+          ctx.fillStyle=`rgba(255,51,85,${p.alpha})`;ctx.fill();
+        }
+        if(p.alpha<=0)packets.splice(i,1);
+        return;
+      }
+      p.x+=p.speed;
+      // AI blocks hostile at wall
+      if(p.hostile && p.x>=wallX-5 && !p.blocked){
+        p.blocked=true;p.blockX=wallX;p.blockY=p.y;blocked++;
+        return;
+      }
+      if(p.x>W){packets.splice(i,1);if(!p.hostile)passed++;return;}
+      ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+      ctx.fillStyle=p.hostile?'rgba(255,51,85,.7)':'rgba(0,195,255,0.5)';ctx.fill();
+    });
+    // stats
+    ctx.fillStyle=G;ctx.font='bold 10px monospace';
+    ctx.fillText(`AI SHIELD ACTIVE — BLOCKED: ${blocked} THREATS`,10,18);
+    ctx.fillStyle=G;ctx.font='9px monospace';
+    ctx.fillText(`RESPONSE TIME: 0.3 SECONDS — SERVER: PROTECTED`,10,H-6);
+    requestAnimationFrame(frame);
+  }
+  frame();
+})();
+
+// ─── SIMULATOR BEFORE: scripted enemy moves in pattern ───
+(function(){
+  const c=document.getElementById('sim-before');
+  c.width=setSize(c);c.height=280;
+  const ctx=c.getContext('2d');
+  const W=c.width,H=c.height;
+  let t=0;
+  // scripted enemy always goes same path
+  const enemyPath=[{x:.8,y:.3},{x:.5,y:.3},{x:.5,y:.6},{x:.2,y:.6}];
+  let pathIdx=0,pathT=0;
+  // friendly
+  let fx=W*.15,fy=H*.5;
+  function frame(){
+    ctx.fillStyle=S1;ctx.fillRect(0,0,W,H);
+    t++;
+    // terrain grid
+    ctx.strokeStyle='rgba(50,80,40,0.3)';ctx.lineWidth=.5;
+    for(let x=0;x<W;x+=30){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}
+    for(let y=0;y<H;y+=30){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
+    // scripted path dots (predictable)
+    ctx.strokeStyle='rgba(255,51,85,0.2)';ctx.lineWidth=1;ctx.setLineDash([3,5]);
+    ctx.beginPath();
+    enemyPath.forEach((p,i)=>{if(i===0)ctx.moveTo(p.x*W,p.y*H);else ctx.lineTo(p.x*W,p.y*H);});
+    ctx.stroke();ctx.setLineDash([]);
+    // enemy move on scripted path
+    pathT+=.006;
+    if(pathT>=1){pathT=0;pathIdx=(pathIdx+1)%enemyPath.length;}
+    const fromP=enemyPath[pathIdx];
+    const toP=enemyPath[(pathIdx+1)%enemyPath.length];
+    const ex=(fromP.x+(toP.x-fromP.x)*pathT)*W;
+    const ey=(fromP.y+(toP.y-fromP.y)*pathT)*H;
+    // enemy (red)
+    ctx.fillStyle='rgba(255,51,85,0.8)';ctx.fillRect(ex-8,ey-6,16,12);
+    ctx.fillStyle=R;ctx.font='8px monospace';ctx.fillText('ENEMY',ex-12,ey-10);
+    // friendly
+    ctx.fillStyle='rgba(1,217,107,0.8)';ctx.fillRect(fx-8,fy-6,16,12);
+    ctx.fillStyle=G;ctx.font='8px monospace';ctx.fillText('BLUE',fx-8,fy-10);
+    // label
+    ctx.fillStyle=DIM;ctx.font='bold 10px monospace';
+    ctx.fillText('SCRIPTED: ENEMY REPEATS SAME PATH',10,H-18);
+    ctx.fillStyle=R;ctx.font='9px monospace';
+    ctx.fillText('PREDICTABLE — TRAINEES LEARN THE PATTERN',10,H-6);
+    requestAnimationFrame(frame);
+  }
+  frame();
+})();
+
+// ─── SIMULATOR AFTER: AI enemy adapts tactics ───
+(function(){
+  const c=document.getElementById('sim-after');
+  c.width=setSize(c);c.height=280;
+  const ctx=c.getContext('2d');
+  const W=c.width,H=c.height;
+  let t=0;
+  // AI enemy uses dynamic positioning
+  let ex=W*.8,ey=H*.3;
+  let evx=-1,evy=.3;
+  let fx=W*.15,fy=H*.5;
+  let thinkTimer=0;
+  const tactics=['FLANKING LEFT','PINCER MOVE','WITHDRAW + AMBUSH','DIRECT ASSAULT','SUPPRESSING FIRE'];
+  let tacticIdx=0;
+  function frame(){
+    ctx.fillStyle=S1;ctx.fillRect(0,0,W,H);
+    t++;thinkTimer++;
+    // terrain grid
+    ctx.strokeStyle='rgba(50,80,40,0.3)';ctx.lineWidth=.5;
+    for(let x=0;x<W;x+=30){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}
+    for(let y=0;y<H;y+=30){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
+    // obstacles (AI uses for cover)
+    const obs=[{x:.4,y:.3,w:.08,h:.15},{x:.6,y:.55,w:.1,h:.1},{x:.3,y:.6,w:.06,h:.12}];
+    obs.forEach(o=>{
+      ctx.fillStyle='rgba(60,50,30,0.6)';ctx.fillRect(o.x*W,o.y*H,o.w*W,o.h*H);
+      ctx.strokeStyle='rgba(80,70,40,0.8)';ctx.lineWidth=1;ctx.strokeRect(o.x*W,o.y*H,o.w*W,o.h*H);
+    });
+    // AI enemy moves dynamically
+    if(thinkTimer>90){
+      thinkTimer=0;tacticIdx=(tacticIdx+1)%tactics.length;
+      // change AI direction based on "tactic"
+      const angle=Math.random()*Math.PI*2;
+      evx=Math.cos(angle)*1.8;evy=Math.sin(angle)*1.8;
+    }
+    ex+=evx;ey+=evy;
+    if(ex<30||ex>W-30)evx*=-1;
+    if(ey<20||ey>H-40)evy*=-1;
+    // AI "thinking" pulse
+    const pls=.3+.3*Math.sin(t*.15);
+    ctx.beginPath();ctx.arc(ex,ey,18,0,Math.PI*2);
+    ctx.strokeStyle=`rgba(255,51,85,${pls})`;ctx.lineWidth=2;ctx.stroke();
+    ctx.fillStyle='rgba(255,51,85,0.15)';ctx.fill();
+    // enemy unit
+    ctx.fillStyle='rgba(255,51,85,0.85)';ctx.fillRect(ex-8,ey-6,16,12);
+    ctx.fillStyle=R;ctx.font='8px monospace';ctx.fillText('AI ENEMY',ex-16,ey-12);
+    // tactic label over enemy
+    ctx.fillStyle=A;ctx.font='bold 8px monospace';ctx.fillText(tactics[tacticIdx],ex-30,ey+20);
+    // line of sight to friendly (AI tracking blue)
+    ctx.strokeStyle='rgba(255,51,85,0.15)';ctx.lineWidth=1;ctx.setLineDash([2,4]);
+    ctx.beginPath();ctx.moveTo(ex,ey);ctx.lineTo(fx,fy);ctx.stroke();ctx.setLineDash([]);
+    // friendly
+    ctx.fillStyle='rgba(1,217,107,0.85)';ctx.fillRect(fx-8,fy-6,16,12);
+    ctx.fillStyle=G;ctx.font='8px monospace';ctx.fillText('BLUE',fx-8,fy-10);
+    // label
+    ctx.fillStyle=G;ctx.font='bold 10px monospace';
+    ctx.fillText(`AI TACTIC: ${tactics[tacticIdx]}`,10,H-18);
+    ctx.fillStyle=G;ctx.font='9px monospace';
+    ctx.fillText('ADAPTS EVERY 3 SECONDS — NO PATTERNS TO MEMORIZE',10,H-6);
+    requestAnimationFrame(frame);
+  }
+  frame();
+})();
+
+</script>
+</body>
+</html>

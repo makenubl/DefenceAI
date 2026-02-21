@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pakistan AI Directorate — Strategic Roadmap 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --g:#01d96b;--g2:rgba(1,217,107,0.12);--g3:rgba(1,217,107,0.35);
+  --a:#ff8c00;--a2:rgba(255,140,0,0.12);--a3:rgba(255,140,0,0.35);
+  --b:#00c3ff;--b2:rgba(0,195,255,0.12);--b3:rgba(0,195,255,0.35);
+  --r:#ff3355;--r2:rgba(255,51,85,0.12);--r3:rgba(255,51,85,0.35);
+  --bg:#020c14;--s1:#040f1c;--s2:#071626;--card:#091d30;
+  --border:rgba(1,217,107,0.18);--tx:#c0d8e8;--tx2:#4e7080;--txb:#eaf6ff;
+  --f-head:'Orbitron',monospace;--f-body:'Rajdhani',sans-serif;--f-mono:'JetBrains Mono',monospace;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:var(--f-body);font-size:16px;overflow-x:hidden;line-height:1.6}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--g);border-radius:3px}
+
+/* ── LOADING ── */
+#loader{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .8s ease,visibility .8s ease}
+#loader.out{opacity:0;visibility:hidden}
+#loader canvas{width:200px;height:200px}
+.load-text{font-family:var(--f-mono);font-size:.75rem;color:var(--g);letter-spacing:.2em;margin-top:1.5rem;animation:blink 1s step-end infinite}
+.load-bar-wrap{width:200px;height:2px;background:rgba(1,217,107,0.15);margin-top:1rem;border-radius:2px;overflow:hidden}
+.load-bar{height:100%;width:0;background:var(--g);border-radius:2px;transition:width 2.2s ease}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:.75rem 2rem;display:flex;align-items:center;justify-content:space-between;background:rgba(2,12,20,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);transition:all .3s}
+.nav-logo{font-family:var(--f-head);font-size:.85rem;font-weight:700;color:var(--g);letter-spacing:.1em}
+.nav-logo span{color:var(--tx2);font-weight:400}
+.nav-links{display:flex;gap:1.5rem;list-style:none}
+.nav-links a{font-family:var(--f-mono);font-size:.65rem;color:var(--tx2);text-decoration:none;letter-spacing:.12em;transition:color .25s;text-transform:uppercase}
+.nav-links a:hover,.nav-links a.active{color:var(--g)}
+.nav-badge{font-family:var(--f-mono);font-size:.6rem;padding:.2rem .6rem;border:1px solid var(--r);color:var(--r);letter-spacing:.1em;animation:pulse-r 2s ease infinite}
+@keyframes pulse-r{0%,100%{opacity:1}50%{opacity:.5}}
+
+/* ── HERO ── */
+#hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
+#radar{position:absolute;inset:0;width:100%;height:100%}
+.hero-inner{position:relative;z-index:2;text-align:center;padding:6rem 2rem 4rem}
+.hero-eyebrow{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.3em;color:var(--g);opacity:.8;margin-bottom:1.5rem}
+.hero-title{font-family:var(--f-head);font-size:clamp(2.2rem,6vw,5rem);font-weight:900;line-height:1.05;color:var(--txb);margin-bottom:.5rem;text-shadow:0 0 40px rgba(1,217,107,0.3)}
+.hero-title .hl{color:var(--g);text-shadow:0 0 30px var(--g3),0 0 60px var(--g2)}
+.hero-sub{font-family:var(--f-head);font-size:clamp(1rem,2.5vw,1.6rem);font-weight:400;color:var(--tx2);margin-bottom:2.5rem;letter-spacing:.15em}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;padding:.4rem 1.2rem;border:1px solid var(--r3);background:var(--r2);font-family:var(--f-mono);font-size:.65rem;color:var(--r);letter-spacing:.15em;margin-bottom:3rem}
+.hero-badge::before{content:'■';animation:blink 1s step-end infinite}
+.hero-stats{display:flex;flex-wrap:wrap;justify-content:center;gap:1px;margin:0 auto;max-width:760px;background:var(--border)}
+.hstat{flex:1;min-width:160px;padding:1.5rem;background:var(--card);text-align:center;border:none}
+.hstat-val{font-family:var(--f-head);font-size:1.9rem;font-weight:700;color:var(--g);line-height:1}
+.hstat-lbl{font-family:var(--f-mono);font-size:.6rem;color:var(--tx2);letter-spacing:.15em;margin-top:.4rem;text-transform:uppercase}
+.scroll-ind{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;font-family:var(--f-mono);font-size:.6rem;color:var(--tx2);letter-spacing:.15em;animation:bounce 2s ease infinite}
+.scroll-ind::after{content:'';display:block;width:1px;height:40px;background:linear-gradient(var(--g),transparent)}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+
+/* ── SECTIONS ── */
+section{padding:6rem 2rem}
+.container{max-width:1200px;margin:0 auto}
+.sec-header{margin-bottom:3.5rem}
+.sec-tag{font-family:var(--f-mono);font-size:.65rem;color:var(--g);letter-spacing:.25em;text-transform:uppercase;margin-bottom:.5rem;opacity:.8}
+.sec-title{font-family:var(--f-head);font-size:clamp(1.5rem,3.5vw,2.5rem);font-weight:700;color:var(--txb);line-height:1.1}
+.sec-title .dim{color:var(--tx2)}
+.sec-line{width:60px;height:2px;background:linear-gradient(90deg,var(--g),transparent);margin-top:1rem}
+.sec-desc{max-width:680px;color:var(--tx2);margin-top:1rem;font-size:1.05rem}
+
+/* ── ANIMATE IN ── */
+.ai{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.ai.v{opacity:1;transform:none}
+.ai-d1{transition-delay:.1s}.ai-d2{transition-delay:.2s}.ai-d3{transition-delay:.3s}.ai-d4{transition-delay:.4s}.ai-d5{transition-delay:.5s}
+
+/* ── EXEC SUMMARY ── */
+#exec{background:var(--s1)}
+.exec-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--border)}
+.exec-block{background:var(--card);padding:2.5rem}
+.exec-block h3{font-family:var(--f-head);font-size:.9rem;font-weight:700;color:var(--g);letter-spacing:.1em;margin-bottom:1rem}
+.exec-block p,.exec-block li{color:var(--tx);font-size:1rem;line-height:1.7}
+.exec-block ul{padding-left:1.2rem;display:flex;flex-direction:column;gap:.4rem}
+.exec-block li::marker{color:var(--g)}
+.callout{margin-top:2rem;padding:1.5rem 2rem;border-left:3px solid var(--g);background:var(--g2);font-family:var(--f-mono);font-size:.85rem;color:var(--txb);line-height:1.6}
+.callout strong{color:var(--g)}
+
+/* ── GLOBAL LESSONS ── */
+#lessons{background:var(--bg)}
+.lessons-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1px;background:var(--border)}
+.lesson-card{background:var(--card);padding:2rem;position:relative;overflow:hidden;transition:all .3s;cursor:default}
+.lesson-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 60%,rgba(1,217,107,0.04));opacity:0;transition:opacity .3s}
+.lesson-card:hover{background:var(--s2);transform:translateY(-2px)}
+.lesson-card:hover::before{opacity:1}
+.lc-flag{font-size:2.2rem;margin-bottom:.75rem}
+.lc-country{font-family:var(--f-head);font-size:.8rem;font-weight:700;color:var(--txb);letter-spacing:.1em;margin-bottom:1.2rem}
+.lc-row{margin-bottom:.8rem}
+.lc-row-tag{font-family:var(--f-mono);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.25rem;display:flex;align-items:center;gap:.4rem}
+.lc-row-tag::before{content:'';display:block;width:6px;height:6px;border-radius:50%}
+.lc-row-tag.win{color:var(--g)}.lc-row-tag.win::before{background:var(--g);box-shadow:0 0 6px var(--g)}
+.lc-row-tag.fail{color:var(--r)}.lc-row-tag.fail::before{background:var(--r);box-shadow:0 0 6px var(--r)}
+.lc-row-tag.lesson{color:var(--a)}.lc-row-tag.lesson::before{background:var(--a);box-shadow:0 0 6px var(--a)}
+.lc-row-text{font-size:.9rem;color:var(--tx);line-height:1.5}
+.lc-spec{margin-top:1rem;padding:.6rem .8rem;background:rgba(1,217,107,0.05);border-left:2px solid var(--g3);font-family:var(--f-mono);font-size:.7rem;color:var(--g);letter-spacing:.08em}
+
+/* ── BASELINE ── */
+#baseline{background:var(--s1)}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;border:1px solid var(--border)}
+thead tr{background:var(--s2)}
+th{font-family:var(--f-mono);font-size:.65rem;letter-spacing:.15em;color:var(--g);padding:1rem 1.2rem;text-align:left;text-transform:uppercase;border-bottom:1px solid var(--border)}
+td{padding:.9rem 1.2rem;font-size:.95rem;border-bottom:1px solid rgba(1,217,107,0.06);vertical-align:middle}
+tr:hover td{background:rgba(1,217,107,0.03)}
+.bar-wrap{width:180px;height:6px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden}
+.bar-fill{height:100%;border-radius:3px;width:0;transition:width 1.4s cubic-bezier(.25,.46,.45,.94)}
+.bar-fill.low{background:linear-gradient(90deg,var(--r),var(--a))}
+.bar-fill.med{background:linear-gradient(90deg,var(--a),#ffe000)}
+.bar-fill.high{background:linear-gradient(90deg,var(--g),#00ffcc)}
+.status-dot{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--f-mono);font-size:.65rem;letter-spacing:.1em}
+.sdot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.sdot.op{background:var(--g);box-shadow:0 0 8px var(--g);animation:sdot-pulse 2s ease infinite}
+.sdot.dep{background:var(--b);box-shadow:0 0 8px var(--b);animation:sdot-pulse 2s ease infinite}
+.sdot.dev{background:var(--a);box-shadow:0 0 8px var(--a)}
+@keyframes sdot-pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.gaps-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1px;background:var(--border);margin-top:2rem}
+.gap-item{background:var(--card);padding:1.5rem;border-left:3px solid var(--r3)}
+.gap-item h4{font-family:var(--f-head);font-size:.75rem;color:var(--r);margin-bottom:.5rem;letter-spacing:.08em}
+.gap-item p{font-size:.9rem;color:var(--tx);line-height:1.5}
+
+/* ── ROADMAP ── */
+#roadmap{background:var(--bg)}
+.phase-timeline{display:flex;align-items:stretch;gap:1px;background:var(--border);margin-bottom:2rem}
+.phase-tab{flex:1;padding:1.5rem;background:var(--card);cursor:pointer;transition:all .3s;position:relative;overflow:hidden;text-align:center;border:none;display:flex;flex-direction:column;align-items:center;gap:.5rem}
+.phase-tab::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--border);transition:background .3s}
+.phase-tab.p1::after{background:var(--g)}
+.phase-tab.p2::after{background:var(--a)}
+.phase-tab.p3::after{background:var(--b)}
+.phase-tab.active{background:var(--s2)}
+.phase-tab:hover:not(.active){background:rgba(255,255,255,0.02)}
+.pt-num{font-family:var(--f-mono);font-size:.6rem;letter-spacing:.2em;margin-bottom:.2rem}
+.pt-num.c1{color:var(--g)}.pt-num.c2{color:var(--a)}.pt-num.c3{color:var(--b)}
+.pt-title{font-family:var(--f-head);font-size:.85rem;font-weight:700;color:var(--txb)}
+.pt-span{font-family:var(--f-mono);font-size:.6rem;color:var(--tx2);letter-spacing:.08em}
+.pt-budget{margin-top:.5rem;font-family:var(--f-mono);font-size:.7rem;font-weight:700}
+.pt-budget.c1{color:var(--g)}.pt-budget.c2{color:var(--a)}.pt-budget.c3{color:var(--b)}
+.phase-content{display:none;padding:2.5rem;background:var(--card);border:1px solid var(--border);animation:fadeInUp .4s ease}
+.phase-content.active{display:block}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.pc-obj{padding:1.2rem 1.5rem;border-left:3px solid var(--g);background:var(--g2);font-family:var(--f-mono);font-size:.8rem;color:var(--txb);margin-bottom:2rem}
+.pc-obj.a{border-color:var(--a);background:var(--a2)}
+.pc-obj.b{border-color:var(--b);background:var(--b2)}
+.pc-sections{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+.pc-col h3{font-family:var(--f-head);font-size:.8rem;font-weight:700;letter-spacing:.1em;margin-bottom:1rem}
+.pc-col.c1 h3{color:var(--g)}.pc-col.c2 h3{color:var(--a)}.pc-col.c3 h3{color:var(--b)}
+.pc-item{display:flex;align-items:flex-start;gap:.7rem;margin-bottom:.8rem}
+.pc-item-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:.45rem}
+.c1 .pc-item-dot{background:var(--g)}.c2 .pc-item-dot{background:var(--a)}.c3 .pc-item-dot{background:var(--b)}
+.pc-item-text{font-size:.95rem;color:var(--tx);line-height:1.5}
+.pc-item-text strong{color:var(--txb)}
+
+/* ── APPLICATIONS ── */
+#apps{background:var(--s1)}
+.apps-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1px;background:var(--border)}
+.app-card{background:var(--card);padding:2rem;position:relative;overflow:hidden;transition:all .3s}
+.app-card:hover{background:var(--s2);transform:translateY(-3px);box-shadow:0 20px 60px rgba(0,0,0,.5),0 0 30px var(--g2)}
+.app-num{font-family:var(--f-mono);font-size:.6rem;color:var(--g);letter-spacing:.2em;margin-bottom:.8rem}
+.app-icon{font-size:2rem;margin-bottom:.8rem}
+.app-title{font-family:var(--f-head);font-size:1rem;font-weight:700;color:var(--txb);margin-bottom:.5rem}
+.app-desc{font-size:.95rem;color:var(--tx);line-height:1.6;margin-bottom:1.5rem}
+.app-meta{display:flex;flex-direction:column;gap:.6rem;padding-top:1.2rem;border-top:1px solid var(--border)}
+.app-meta-row{display:flex;align-items:center;justify-content:space-between;font-family:var(--f-mono);font-size:.65rem}
+.app-meta-lbl{color:var(--tx2);letter-spacing:.1em;text-transform:uppercase}
+.app-meta-val{color:var(--txb)}
+.risk-badge{padding:.15rem .5rem;border-radius:2px;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700}
+.risk-vl{background:var(--g2);color:var(--g);border:1px solid var(--g3)}
+.risk-l{background:rgba(0,195,255,0.1);color:var(--b);border:1px solid var(--b3)}
+.risk-m{background:var(--a2);color:var(--a);border:1px solid var(--a3)}
+.app-bar-wrap{margin-top:1rem;height:2px;background:rgba(255,255,255,0.06);border-radius:1px;overflow:hidden}
+.app-bar{height:100%;background:linear-gradient(90deg,var(--g),#00ffaa);width:0;transition:width 1.6s cubic-bezier(.25,.46,.45,.94)}
+
+/* ── BUDGET ── */
+#budget{background:var(--bg)}
+.budget-grid{display:grid;grid-template-columns:1fr 2fr;gap:2rem;align-items:start}
+.budget-summary{background:var(--card);padding:2rem;border:1px solid var(--border)}
+.bsum-title{font-family:var(--f-head);font-size:.75rem;font-weight:700;color:var(--tx2);letter-spacing:.1em;margin-bottom:1.5rem}
+.bsum-total{margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--border)}
+.bsum-total-val{font-family:var(--f-head);font-size:1.6rem;font-weight:900;color:var(--g);text-shadow:0 0 20px var(--g3)}
+.bsum-total-lbl{font-family:var(--f-mono);font-size:.6rem;color:var(--tx2);letter-spacing:.15em;margin-top:.3rem}
+.bsum-compare{margin-top:1.5rem;padding:.8rem 1rem;background:var(--g2);border-left:2px solid var(--g);font-family:var(--f-mono);font-size:.7rem;color:var(--g);line-height:1.6}
+.budget-bars{background:var(--card);padding:2rem;border:1px solid var(--border)}
+.bbar-item{margin-bottom:2rem}
+.bbar-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.6rem}
+.bbar-phase{font-family:var(--f-head);font-size:.8rem;font-weight:700}
+.bbar-phase.c1{color:var(--g)}.bbar-phase.c2{color:var(--a)}.bbar-phase.c3{color:var(--b)}
+.bbar-amount{font-family:var(--f-mono);font-size:.85rem;color:var(--txb)}
+.bbar-span{font-family:var(--f-mono);font-size:.6rem;color:var(--tx2);letter-spacing:.1em;margin-bottom:.6rem}
+.bbar-track{height:8px;background:rgba(255,255,255,0.05);border-radius:4px;overflow:hidden;position:relative}
+.bbar-fill{height:100%;width:0;border-radius:4px;transition:width 1.8s cubic-bezier(.25,.46,.45,.94)}
+.bbar-fill.c1{background:linear-gradient(90deg,var(--g),#00ffaa)}
+.bbar-fill.c2{background:linear-gradient(90deg,var(--a),#ffcc00)}
+.bbar-fill.c3{background:linear-gradient(90deg,var(--b),#aa44ff)}
+.bbar-items{margin-top:.8rem;display:flex;flex-wrap:wrap;gap:.4rem}
+.bbar-tag{font-family:var(--f-mono);font-size:.6rem;padding:.15rem .5rem;letter-spacing:.08em}
+.bbar-tag.c1{background:var(--g2);color:var(--g)}.bbar-tag.c2{background:var(--a2);color:var(--a)}.bbar-tag.c3{background:var(--b2);color:var(--b)}
+
+/* ── RISK MATRIX ── */
+#risks{background:var(--s1)}
+.risk-layout{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start}
+.risk-matrix-wrap{background:var(--card);padding:2rem;border:1px solid var(--border)}
+.risk-matrix-title{font-family:var(--f-mono);font-size:.65rem;color:var(--tx2);letter-spacing:.15em;margin-bottom:1rem;text-transform:uppercase}
+.risk-canvas-wrap{position:relative;width:100%;padding-bottom:100%}
+.risk-svg{position:absolute;inset:0;width:100%;height:100%;cursor:crosshair}
+/* Tooltip */
+.svg-tooltip{position:fixed;pointer-events:none;background:var(--s2);border:1px solid var(--border);padding:.5rem .8rem;font-family:var(--f-mono);font-size:.65rem;color:var(--txb);letter-spacing:.06em;max-width:220px;line-height:1.5;z-index:200;display:none;box-shadow:0 8px 32px rgba(0,0,0,.5)}
+.risk-list{display:flex;flex-direction:column;gap:.8rem}
+.risk-item{background:var(--card);padding:1.2rem 1.5rem;border:1px solid var(--border);position:relative;overflow:hidden;transition:all .3s}
+.risk-item::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px}
+.risk-item.rc{border-color:rgba(255,51,85,0.3)}.risk-item.rc::before{background:var(--r)}
+.risk-item.rh{border-color:rgba(255,140,0,0.3)}.risk-item.rh::before{background:var(--a)}
+.risk-item.rm{border-color:rgba(0,195,255,0.3)}.risk-item.rm::before{background:var(--b)}
+.risk-item:hover{transform:translateX(4px)}
+.ri-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.4rem}
+.ri-name{font-family:var(--f-head);font-size:.75rem;font-weight:700;color:var(--txb);letter-spacing:.06em}
+.ri-severity{font-family:var(--f-mono);font-size:.55rem;padding:.1rem .4rem;letter-spacing:.1em;text-transform:uppercase}
+.ri-severity.sc{background:var(--r2);color:var(--r)}.ri-severity.sh{background:var(--a2);color:var(--a)}.ri-severity.sm{background:var(--b2);color:var(--b)}
+.ri-text{font-size:.85rem;color:var(--tx);line-height:1.5}
+
+/* ── ACTION PLAN ── */
+#action{background:var(--bg)}
+.action-timeline{position:relative;padding-left:3rem}
+.action-timeline::before{content:'';position:absolute;left:1rem;top:.5rem;bottom:.5rem;width:1px;background:linear-gradient(var(--g),var(--b),transparent)}
+.act-item{position:relative;margin-bottom:2.5rem;opacity:0;transform:translateX(-20px);transition:all .6s ease}
+.act-item.v{opacity:1;transform:none}
+.act-num{position:absolute;left:-3rem;width:2rem;height:2rem;background:var(--g);color:var(--bg);font-family:var(--f-head);font-size:.7rem;font-weight:900;display:flex;align-items:center;justify-content:center;top:.2rem;box-shadow:0 0 20px var(--g3)}
+.act-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.5rem}
+.act-title{font-family:var(--f-head);font-size:.95rem;font-weight:700;color:var(--txb)}
+.act-days{font-family:var(--f-mono);font-size:.6rem;color:var(--g);letter-spacing:.1em;padding:.15rem .5rem;border:1px solid var(--g3);background:var(--g2)}
+.act-desc{font-size:.95rem;color:var(--tx);line-height:1.6}
+.act-note{margin-top:.6rem;font-family:var(--f-mono);font-size:.7rem;color:var(--a);letter-spacing:.05em}
+
+/* ── APPENDIX ── */
+#appendix{background:var(--s1)}
+.append-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border)}
+.append-block{background:var(--card);padding:2rem}
+.append-block h3{font-family:var(--f-head);font-size:.85rem;font-weight:700;color:var(--g);letter-spacing:.1em;margin-bottom:1.2rem}
+.append-item{display:flex;gap:.8rem;margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px solid rgba(1,217,107,0.06)}
+.append-item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.append-num{font-family:var(--f-mono);font-size:.7rem;color:var(--g);flex-shrink:0;margin-top:.1rem}
+.append-text{font-size:.9rem;color:var(--tx);line-height:1.5}
+.append-text strong{color:var(--txb)}
+
+/* ── SCROLL PROGRESS ── */
+#scroll-prog{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--g),var(--b));width:0%;z-index:9999;transition:width .1s linear}
+/* ── BACK TO TOP ── */
+#btt{position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;background:var(--g);color:var(--bg);border:none;cursor:pointer;font-family:var(--f-head);font-size:.75rem;font-weight:900;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:all .3s;z-index:200;box-shadow:0 0 20px var(--g3)}
+#btt.show{opacity:1;pointer-events:all}
+#btt:hover{transform:translateY(-3px);box-shadow:0 0 30px var(--g3)}
+/* ── MOBILE HAMBURGER ── */
+.hamburger{display:none;flex-direction:column;gap:4px;cursor:pointer;padding:.3rem;background:none;border:none}
+.hamburger span{display:block;width:22px;height:2px;background:var(--g);transition:all .3s;border-radius:1px}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(4px,4px)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(4px,-4px)}
+.mobile-menu{display:none;position:fixed;top:48px;left:0;right:0;background:rgba(2,12,20,.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);z-index:99;flex-direction:column;padding:1rem 0}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-family:var(--f-mono);font-size:.75rem;color:var(--tx2);text-decoration:none;letter-spacing:.15em;padding:.8rem 2rem;text-transform:uppercase;border-bottom:1px solid rgba(1,217,107,0.05);transition:all .2s}
+.mobile-menu a:hover{color:var(--g);background:var(--g2)}
+@media(max-width:768px){.hamburger{display:flex}}
+/* ── FOOTER ── */
+footer{background:var(--s2);border-top:1px solid var(--border);padding:3rem 2rem;text-align:center}
+.foot-logo{font-family:var(--f-head);font-size:1rem;font-weight:700;color:var(--g);letter-spacing:.15em;margin-bottom:1rem}
+.foot-class{display:inline-block;font-family:var(--f-mono);font-size:.65rem;color:var(--r);border:1px solid var(--r3);padding:.3rem 1rem;letter-spacing:.2em;margin-bottom:1.5rem}
+.foot-meta{font-family:var(--f-mono);font-size:.65rem;color:var(--tx2);letter-spacing:.1em;line-height:2}
+.foot-meta a{color:var(--g);text-decoration:none}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  nav{padding:.6rem 1rem}
+  .nav-links{display:none}
+  section{padding:4rem 1rem}
+  .exec-grid,.pc-sections,.budget-grid,.risk-layout,.append-grid{grid-template-columns:1fr}
+  .hero-stats{gap:1px}
+  .hstat{min-width:120px}
+  .hstat-val{font-size:1.4rem}
+  .lessons-grid{grid-template-columns:1fr}
+  .phase-timeline{flex-direction:column}
+  .apps-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════ LOADER ══════════════════ -->
+<div id="loader">
+  <canvas id="loaderCanvas" width="200" height="200"></canvas>
+  <div class="load-text">INITIALIZING AI DIRECTORATE SYSTEMS</div>
+  <div class="load-bar-wrap"><div class="load-bar" id="loadBar"></div></div>
+</div>
+
+<!-- ══════════════════ NAV ══════════════════ -->
+<div id="scroll-prog"></div>
+<div id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
+<div class="svg-tooltip" id="svgTip"></div>
+
+<nav>
+  <div class="nav-logo">PAK <span>//</span> AI DIRECTORATE</div>
+  <ul class="nav-links">
+    <li><a href="#lessons">GLOBAL INTEL</a></li>
+    <li><a href="#baseline">BASELINE</a></li>
+    <li><a href="#roadmap">ROADMAP</a></li>
+    <li><a href="#apps">APPLICATIONS</a></li>
+    <li><a href="#budget">BUDGET</a></li>
+    <li><a href="#risks">RISKS</a></li>
+    <li><a href="#action">ACTION PLAN</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:1rem">
+    <a href="briefing.html" style="font-family:var(--f-mono);font-size:.6rem;letter-spacing:.1em;padding:.3rem .8rem;border:1px solid var(--g);color:var(--g);text-decoration:none;border-radius:3px;white-space:nowrap">▶ EXEC BRIEFING</a>
+    <div class="nav-badge">◆ INTERNAL DOCUMENT</div>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#lessons" onclick="closeMenu()">GLOBAL INTEL</a>
+  <a href="#baseline" onclick="closeMenu()">BASELINE</a>
+  <a href="#roadmap" onclick="closeMenu()">ROADMAP</a>
+  <a href="#apps" onclick="closeMenu()">APPLICATIONS</a>
+  <a href="#budget" onclick="closeMenu()">BUDGET</a>
+  <a href="#risks" onclick="closeMenu()">RISKS</a>
+  <a href="#action" onclick="closeMenu()">ACTION PLAN</a>
+</div>
+
+<!-- ══════════════════ HERO ══════════════════ -->
+<section id="hero">
+  <canvas id="radar"></canvas>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">PAKISTAN ARMY — STRATEGIC PLANNING DIVISION</div>
+    <h1 class="hero-title">
+      <span class="hl">AI</span> DIRECTORATE<br>
+      <span style="font-size:.55em;color:var(--tx2);letter-spacing:.08em">STRATEGIC ROADMAP</span>
+    </h1>
+    <div class="hero-sub">2026 — 2035 &nbsp;|&nbsp; THREE PHASES &nbsp;|&nbsp; PRACTICAL & DEPLOYABLE</div>
+    <div class="hero-badge">INTERNAL // PLANNING DOCUMENT // NOT FOR DISTRIBUTION</div>
+    <div class="hero-stats">
+      <div class="hstat"><div class="hstat-val" data-count="10">0</div><div class="hstat-lbl">YEAR PROGRAM</div></div>
+      <div class="hstat"><div class="hstat-val" data-count="34" data-suffix="B">0</div><div class="hstat-lbl">RS. INVESTMENT</div></div>
+      <div class="hstat"><div class="hstat-val" data-count="5">0</div><div class="hstat-lbl">PHASE-1 APPS</div></div>
+      <div class="hstat"><div class="hstat-val" data-count="6">0</div><div class="hstat-lbl">MILITARIES STUDIED</div></div>
+      <div class="hstat"><div class="hstat-val" data-count="90">0</div><div class="hstat-lbl">DAY FIRST SPRINT</div></div>
+    </div>
+  </div>
+  <div class="scroll-ind">SCROLL</div>
+</section>
+
+<!-- ══════════════════ EXEC SUMMARY ══════════════════ -->
+<section id="exec">
+  <div class="container">
+    <div class="sec-header ai">
+      <div class="sec-tag">// EXECUTIVE BRIEF</div>
+      <h2 class="sec-title">WHAT THIS IS &amp; WHY IT MATTERS <span class="dim">NOW</span></h2>
+      <div class="sec-line"></div>
+    </div>
+    <div class="exec-grid ai ai-d1">
+      <div class="exec-block">
+        <h3>WHAT THIS ROADMAP DELIVERS</h3>
+        <ul>
+          <li>A phased plan from 0 to operational AI — grounded in what Pakistan <em>actually has today</em>, not aspirational tech</li>
+          <li>Lessons from 6 militaries — what worked, what failed, what was too expensive, what was too slow</li>
+          <li>5 applications deployable in 12–18 months, using existing NUST/FAST talent and domestic firms</li>
+          <li>Organizational structure, budget, risk register, and 90-day action plan</li>
+          <li>A path to reducing dangerous Chinese AI dependency by Year 4</li>
+        </ul>
+        <div class="callout"><strong>CORE FINDING:</strong> Pakistan should NOT start with autonomous weapons. The highest-value applications — logistics AI, ISR image analysis, predictive maintenance, cyber defense — can deploy in &lt;18 months and cost less than 4 F-16s for the entire 10-year program.</div>
+      </div>
+      <div class="exec-block">
+        <h3>WHY THIS CANNOT WAIT</h3>
+        <ul>
+          <li><strong>India's iDEX program</strong> has already engaged 300+ AI startups for defense contracts — India's military AI is accelerating faster than Pakistan's is starting</li>
+          <li><strong>Indian APT groups (Sidewinder)</strong> are actively inside Pakistani military networks <em>right now</em> — AI cyber defense is not optional</li>
+          <li><strong>The drone warfare revolution</strong> (Ukraine, Armenia, Gaza) makes AI-enabled UAVs a peer-parity requirement, not a luxury</li>
+          <li><strong>Pakistan's talent is emigrating</strong> — the AI engineers training at NUST and FAST are leaving for UAE, US, and UK. The window to capture this generation is 2–4 years</li>
+          <li><strong>Chinese AI dependency</strong> is Pakistan's largest strategic vulnerability — JF-17, Burraq, HQ-9, Wing Loong all run Chinese AI. This must be diversified</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ GLOBAL LESSONS ══════════════════ -->
+<section id="lessons">
+  <div class="container">
+    <div class="sec-header ai">
+      <div class="sec-tag">// GLOBAL INTELLIGENCE</div>
+      <h2 class="sec-title">WHAT 6 MILITARIES <span class="dim">PROVED</span></h2>
+      <div class="sec-line"></div>
+      <p class="sec-desc">Synthesized from operational deployments, SIPRI data, IISS Military Balance, and open-source defense reporting.</p>
+    </div>
+    <div class="lessons-grid">
+
+      <div class="lesson-card ai ai-d1">
+        <div class="lc-flag">🇺🇸</div>
+        <div class="lc-country">UNITED STATES — THE PIONEER</div>
+        <div class="lc-row">
+          <div class="lc-row-tag win">✓ KEY WIN</div>
+          <div class="lc-row-text"><strong>Project Maven:</strong> AI on drone ISR footage. Reduced analyst workload ~50%. Operational in Afghanistan &amp; Iraq by 2019. AI-predictive maintenance on F-35 cut unscheduled depot visits by ~20%.</div>
+        </div>
+        <div class="lc-row">
+          <div class="lc-row-tag fail">✗ WHAT FAILED</div>
+          <div class="lc-row-text"><strong>JADC2:</strong> Technically feasible by 2021, still not fully deployed in 2025. Service politics and data standards — not the technology — caused the delay.</div>
+        </div>
+        <div class="lc-row">
+          <div class="lc-row-tag lesson">→ LESSON FOR PAKISTAN</div>
+          <div class="lc-row-text">Data infrastructure is always the bottleneck — not AI models. Start digitizing military records immediately.</div>
+        </div>
+        <div class="lc-spec">JAIC (2018) → CDAO (2022) → Task Force Lima LLMs (2023)</div>
+      </div>
+
+      <div class="lesson-card ai ai-d2">
+        <div class="lc-flag">🇮🇱</div>
+        <div class="lc-country">ISRAEL — MOST OPERATIONALLY ADVANCED</div>
+        <div class="lc-row">
+          <div class="lc-row-tag win">✓ KEY WIN</div>
+          <div class="lc-row-text"><strong>Iron Dome AI</strong> (operational since 2011) — world's most battle-tested military AI. <strong>Gospel system:</strong> AI target generation, compressed weeks of analysis to minutes in 2021 and 2023–24 operations.</div>
+        </div>
+        <div class="lc-row">
+          <div class="lc-row-tag fail">✗ WHAT FAILED</div>
+          <div class="lc-row-text">Gospel/Lavender AI targeting in dense urban environments created massive international legitimacy costs that partially offset tactical gains.</div>
+        </div>
+        <div class="lc-row">
+          <div class="lc-row-tag lesson">→ LESSON FOR PAKISTAN</div>
+          <div class="lc-row-text">AI for ISR and decision support is proven. Autonomous lethal targeting requires human-machine teaming legal framework first — and for Pakistan's strategic environment, this IS a real constraint.</div>
+        </div>
+        <div class="lc-spec">Unit 8200 alumni created global AI defense ecosystem</div>
+      </div>
+
+      <div class="lesson-card ai ai-d3">
+        <div class="lc-flag">🇹🇷</div>
+        <div class="lc-country">TURKEY — THE AFFORDABLE DRONE MODEL</div>
+        <div class="lc-row">
+          <div class="lc-row-tag win">✓ KEY WIN</div>
+          <div class="lc-row-text"><strong>Bayraktar TB2</strong> at $5M/unit (vs. $30M MQ-9) achieved strategic effects in Libya, Nagorno-Karabakh (decisive), Ukraine. <strong>Kargu-2</strong> confirmed first autonomous lethal engagement (UN report, Libya 2021).</div>
+        </div>
+        <div class="lc-row">
+          <div class="lc-row-tag lesson">→ LESSON FOR PAKISTAN</div>
+          <div class="lc-row-text">Pakistan already exports Shahpar to Azerbaijan — the same customer that bought TB2. Turkey built this from near-zero in 15 years using <em>domestic-first</em> procurement. This model is directly replicable.</div>
+        </div>
+        <div class="lc-spec">Pakistan has TB2 in inventory — highest AI-ready drone asset</div>
+      </div>
+
+      <div class="lesson-card ai ai-d1">
+        <div class="lc-flag">🇨🇳</div>
+        <div class="lc-country">CHINA — MILITARY-CIVIL FUSION</div>
+        <div class="lc-row">
+          <div class="lc-row-tag win">✓ KEY WIN</div>
+          <div class="lc-row-text"><strong>MCF Doctrine:</strong> Mandated Baidu, Alibaba, SenseTime to contribute to PLA AI. Drone swarms of 200+ UAVs demonstrated. AI surveillance (tested in Xinjiang) directly transferable to military ISR.</div>
+        </div>
+        <div class="lc-row">
+          <div class="lc-row-tag fail">✗ UNKNOWN RISK</div>
+          <div class="lc-row-text">Actual combat AI performance unproven (no peer conflict since 1979). Chinese AI chips lag NVIDIA by 2–3 generations.</div>
+        </div>
+        <div class="lc-row">
+          <div class="lc-row-tag lesson">→ LESSON FOR PAKISTAN</div>
+          <div class="lc-row-text">MCF model is applicable: formally mobilize NUST, FAST, and commercial sector (10Pearls, Arbisoft) for defense AI. But Chinese AI dependency = strategic vulnerability.</div>
+        </div>
+        <div class="lc-spec">Pakistan's most AI-capable systems are all Chinese-sourced</div>
+      </div>
+
+      <div class="lesson-card ai ai-d2">
+        <div class="lc-flag">🇮🇳</div>
+        <div class="lc-country">INDIA — THE STRUCTURAL COMPARISON</div>
+        <div class="lc-row">
+          <div class="lc-row-tag win">✓ KEY WIN</div>
+          <div class="lc-row-text"><strong>iDEX model:</strong> Startup-to-military bridge. Contracts up to ₹1.5Cr awarded within weeks. 400+ startups engaged by 2025, 75+ defense AI contracts awarded. AI border surveillance along LAC and LoC operational. Dedicated AI in Defence fund launched 2024.</div>
+        </div>
+        <div class="lc-row">
+          <div class="lc-row-tag fail">✗ WHAT FAILED</div>
+          <div class="lc-row-text">Theatre command integration facing inter-service resistance. DRDO internal AI development far slower than the startup track.</div>
+        </div>
+        <div class="lc-row">
+          <div class="lc-row-tag lesson">→ LESSON FOR PAKISTAN</div>
+          <div class="lc-row-text">iDEX model is the single most important structural innovation India made. Pakistan needs an equivalent fast-procurement mechanism for AI startups.</div>
+        </div>
+        <div class="lc-spec">India is accelerating faster than Pakistan is starting</div>
+      </div>
+
+      <div class="lesson-card ai ai-d2" style="border-top:2px solid var(--a);position:relative">
+        <div style="position:absolute;top:.8rem;right:.8rem;font-family:var(--f-mono);font-size:.55rem;color:var(--a);border:1px solid var(--a3);padding:.1rem .4rem;letter-spacing:.1em">2024–25 UPDATE</div>
+        <div class="lc-flag">🇺🇦</div>
+        <div class="lc-country">UKRAINE — THE FPV REVOLUTION</div>
+        <div class="lc-row">
+          <div class="lc-row-tag win">✓ KEY WIN</div>
+          <div class="lc-row-text"><strong>FPV AI drones at $200–500 each</strong> destroyed $2M+ tanks. AI-guided first-person-view kamikaze drones outperformed million-dollar munitions. Ukraine deployed 1M+ drones in 2024. AI target recognition allows single operator to command multiple drones simultaneously.</div>
+        </div>
+        <div class="lc-row">
+          <div class="lc-row-tag win">✓ KEY WIN</div>
+          <div class="lc-row-text"><strong>AI logistics:</strong> Starlink + AI-coordinated supply routing under fire. <strong>Drone swarm tactics:</strong> Saturating air defenses with cheap AI drones to enable precision strike — this changed doctrine globally in 2024.</div>
+        </div>
+        <div class="lc-row">
+          <div class="lc-row-tag lesson">→ LESSON FOR PAKISTAN</div>
+          <div class="lc-row-text">A $500 AI FPV drone can mission-kill a $3M armored vehicle. Pakistan's Phase 2 must include a domestic FPV AI swarm program. Cost: Rs. 200–400M. Threat to India's tank corps is immediate and asymmetric.</div>
+        </div>
+        <div class="lc-spec" style="border-color:var(--a3);color:var(--a)">Most important battlefield AI lesson of 2024 — directly applicable to LoC/working boundary scenarios</div>
+      </div>
+
+      <div class="lesson-card ai ai-d3">
+        <div class="lc-flag">🇦🇪</div>
+        <div class="lc-country">UAE — THE ACCELERATED BUYER</div>
+        <div class="lc-row">
+          <div class="lc-row-tag win">✓ KEY WIN</div>
+          <div class="lc-row-text"><strong>EDGE Group (2019):</strong> Consolidated 25 defense entities into one with a 5-year AI mandate. AI-fused C4ISR at national level. Bayanat geospatial AI for satellite imagery analysis. Calidus AI-enabled armed drone.</div>
+        </div>
+        <div class="lc-row">
+          <div class="lc-row-tag lesson">→ LESSON FOR PAKISTAN</div>
+          <div class="lc-row-text">Consolidating NESCOM, ARL, AWC, POF under one AI-mandate body (like EDGE) would be the single most high-impact structural decision Pakistan can make.</div>
+        </div>
+        <div class="lc-spec">Consolidation + mandate beats organic evolution every time</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ BASELINE ══════════════════ -->
+<section id="baseline">
+  <div class="container">
+    <div class="sec-header ai">
+      <div class="sec-tag">// PAKISTAN BASELINE ASSESSMENT</div>
+      <h2 class="sec-title">CURRENT STATE OF <span class="dim">PLAY</span></h2>
+      <div class="sec-line"></div>
+      <p class="sec-desc">Honest assessment of Pakistan's AI-ready military assets as of early 2026. Bars show AI readiness, not overall platform capability.</p>
+    </div>
+    <div class="table-wrap ai">
+      <table>
+        <thead>
+          <tr>
+            <th>PLATFORM / ASSET</th>
+            <th>AI READINESS</th>
+            <th>LEVEL</th>
+            <th>STATUS</th>
+            <th>NOTE</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>JF-17 Block III</strong></td>
+            <td><div class="bar-wrap"><div class="bar-fill med" data-w="55"></div></div></td>
+            <td style="font-family:var(--f-mono);font-size:.75rem;color:var(--a)">MEDIUM</td>
+            <td><span class="status-dot"><span class="sdot op"></span>IN SERVICE</span></td>
+            <td style="font-size:.8rem;color:var(--tx2)">Chinese AI in KLJ-7A AESA radar firmware</td>
+          </tr>
+          <tr>
+            <td><strong>Bayraktar TB2</strong></td>
+            <td><div class="bar-wrap"><div class="bar-fill med" data-w="50"></div></div></td>
+            <td style="font-family:var(--f-mono);font-size:.75rem;color:var(--a)">MEDIUM</td>
+            <td><span class="status-dot"><span class="sdot op"></span>IN SERVICE</span></td>
+            <td style="font-size:.8rem;color:var(--tx2)">Turkish AI-assisted targeting — best ready asset</td>
+          </tr>
+          <tr>
+            <td><strong>Wing Loong I/II</strong></td>
+            <td><div class="bar-wrap"><div class="bar-fill med" data-w="48"></div></div></td>
+            <td style="font-family:var(--f-mono);font-size:.75rem;color:var(--a)">MEDIUM</td>
+            <td><span class="status-dot"><span class="sdot op"></span>IN SERVICE</span></td>
+            <td style="font-size:.8rem;color:var(--tx2)">Chinese AI features; dependency risk</td>
+          </tr>
+          <tr>
+            <td><strong>Saab-2000 Erieye AEW&amp;C</strong></td>
+            <td><div class="bar-wrap"><div class="bar-fill med" data-w="45"></div></div></td>
+            <td style="font-family:var(--f-mono);font-size:.75rem;color:var(--a)">MEDIUM</td>
+            <td><span class="status-dot"><span class="sdot op"></span>OPERATIONAL</span></td>
+            <td style="font-size:.8rem;color:var(--tx2)">Automated track management; Swedish maintained</td>
+          </tr>
+          <tr>
+            <td><strong>HQ-9 / LY-80 SAM</strong></td>
+            <td><div class="bar-wrap"><div class="bar-fill med" data-w="45"></div></div></td>
+            <td style="font-family:var(--f-mono);font-size:.75rem;color:var(--a)">MEDIUM</td>
+            <td><span class="status-dot"><span class="sdot op"></span>OPERATIONAL</span></td>
+            <td style="font-size:.8rem;color:var(--tx2)">Automated engagement; Chinese fire control AI</td>
+          </tr>
+          <tr>
+            <td><strong>Shahpar-II UAV</strong></td>
+            <td><div class="bar-wrap"><div class="bar-fill low" data-w="30"></div></div></td>
+            <td style="font-family:var(--f-mono);font-size:.75rem;color:var(--a)">LOW–MED</td>
+            <td><span class="status-dot"><span class="sdot op"></span>OPERATIONAL</span></td>
+            <td style="font-size:.8rem;color:var(--tx2)">Waypoint nav; imagery analyzed manually</td>
+          </tr>
+          <tr>
+            <td><strong>Burraq UCAV</strong></td>
+            <td><div class="bar-wrap"><div class="bar-fill low" data-w="15"></div></div></td>
+            <td style="font-family:var(--f-mono);font-size:.75rem;color:var(--r)">LOW</td>
+            <td><span class="status-dot"><span class="sdot op"></span>OPERATIONAL</span></td>
+            <td style="font-size:.8rem;color:var(--tx2)">Pre-programmed; no onboard ML; combat-proven CT</td>
+          </tr>
+          <tr>
+            <td><strong>PRSS-1 Satellite</strong></td>
+            <td><div class="bar-wrap"><div class="bar-fill low" data-w="12"></div></div></td>
+            <td style="font-family:var(--f-mono);font-size:.75rem;color:var(--r)">LOW</td>
+            <td><span class="status-dot"><span class="sdot op"></span>OPERATIONAL</span></td>
+            <td style="font-size:.8rem;color:var(--tx2)">1m optical; imagery manually analyzed — huge gap</td>
+          </tr>
+          <tr>
+            <td><strong>Safe City Systems</strong></td>
+            <td><div class="bar-wrap"><div class="bar-fill high" data-w="80"></div></div></td>
+            <td style="font-family:var(--f-mono);font-size:.75rem;color:var(--g)">HIGH</td>
+            <td><span class="status-dot"><span class="sdot dep"></span>DEPLOYED</span></td>
+            <td style="font-size:.8rem;color:var(--tx2)">Lahore/Peshawar Chinese facial recognition — transferable skills</td>
+          </tr>
+          <tr>
+            <td><strong>NUST / FAST AI Talent</strong></td>
+            <td><div class="bar-wrap"><div class="bar-fill high" data-w="70"></div></div></td>
+            <td style="font-family:var(--f-mono);font-size:.75rem;color:var(--b)">DEPLOYABLE</td>
+            <td><span class="status-dot"><span class="sdot dep"></span>AVAILABLE</span></td>
+            <td style="font-size:.8rem;color:var(--tx2)">5,000–8,000 ML professionals; awaiting defense tasking</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="margin-top:2.5rem" class="ai">
+      <div class="sec-tag" style="margin-bottom:1rem">// CRITICAL GAPS — MUST ADDRESS IN PHASE 1</div>
+      <div class="gaps-grid">
+        <div class="gap-item">
+          <h4>NO DEFENSE AI STRATEGY</h4>
+          <p>National AI Policy (2023) is civilian-only. No military AI roadmap exists. No budget line item. No organizational mandate.</p>
+        </div>
+        <div class="gap-item">
+          <h4>DATA DESERT</h4>
+          <p>Military maintenance logs, ISR footage, logistics records are not digitized or structured for ML training. AI is impossible without this foundation.</p>
+        </div>
+        <div class="gap-item">
+          <h4>NO DOMESTIC GPU COMPUTE</h4>
+          <p>No domestic HPC for AI training. Current options: Chinese chips (dependency risk) or US commercial cloud (security risk). Need air-gapped GPU infrastructure.</p>
+        </div>
+        <div class="gap-item">
+          <h4>SILOED ORGANIZATIONS</h4>
+          <p>NESCOM, ARL, AWC, PAC, POF work independently with no joint AI development mandate. UAE solved this with EDGE consolidation in one decision.</p>
+        </div>
+        <div class="gap-item">
+          <h4>NO FAST-PROCUREMENT MECHANISM</h4>
+          <p>Contracting startups for defense AI takes years under current rules. India's iDEX awards contracts in weeks. This speed gap is decisive.</p>
+        </div>
+        <div class="gap-item">
+          <h4>BRAIN DRAIN IN PROGRESS</h4>
+          <p>NUST/FAST AI graduates are leaving for UAE, US, UK right now. The window to retain this generation is 2–4 years before they're gone permanently.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ ROADMAP ══════════════════ -->
+<section id="roadmap">
+  <div class="container">
+    <div class="sec-header ai">
+      <div class="sec-tag">// THE ROADMAP</div>
+      <h2 class="sec-title">THREE PHASES TO <span class="dim">OPERATIONAL AI</span></h2>
+      <div class="sec-line"></div>
+    </div>
+
+    <div class="phase-timeline ai">
+      <button class="phase-tab p1 active" onclick="switchPhase(1)">
+        <div class="pt-num c1">// PHASE 01</div>
+        <div class="pt-title">FOUNDATION</div>
+        <div class="pt-span">MONTHS 0 — 18</div>
+        <div class="pt-budget c1">Rs. 800M</div>
+      </button>
+      <button class="phase-tab p2" onclick="switchPhase(2)">
+        <div class="pt-num c2">// PHASE 02</div>
+        <div class="pt-title">OPERATIONAL AI</div>
+        <div class="pt-span">MONTHS 18 — 48</div>
+        <div class="pt-budget c2">Rs. 4.6B</div>
+      </button>
+      <button class="phase-tab p3" onclick="switchPhase(3)">
+        <div class="pt-num c3">// PHASE 03</div>
+        <div class="pt-title">STRATEGIC AI</div>
+        <div class="pt-span">YEARS 4 — 10</div>
+        <div class="pt-budget c3">Rs. 18–28B</div>
+      </button>
+    </div>
+
+    <!-- Phase 1 Content -->
+    <div class="phase-content active" id="phase1">
+      <div class="pc-obj"><strong>OBJECTIVE:</strong> Build the organization, digitize data infrastructure, deploy 5 visible AI applications. Demonstrate value to leadership. Establish NUST–Army AI Lab and talent retention pipeline.</div>
+      <div class="pc-sections">
+        <div class="pc-col c1">
+          <h3>ORGANIZATIONAL SETUP</h3>
+          <div class="pc-item"><div class="pc-item-dot"></div><div class="pc-item-text"><strong>AI Directorate established</strong> under DGMO or direct VCOAS authority — needs cross-service mandate</div></div>
+          <div class="pc-item"><div class="pc-item-dot"></div><div class="pc-item-text"><strong>30–50 person team:</strong> Director AI (Brig, STEM background), Research Cell (12 NUST/FAST PhD researchers on secondment), Data Engineering Cell (8), Applications Cell (10), Policy Cell (5)</div></div>
+          <div class="pc-item"><div class="pc-item-dot"></div><div class="pc-item-text"><strong>Fast-procurement charter:</strong> Contracts under Rs. 50M awarded in 60 days — Pakistan's iDEX equivalent</div></div>
+          <div class="pc-item"><div class="pc-item-dot"></div><div class="pc-item-text"><strong>NUST–Army AI Lab:</strong> Formal joint lab, dedicated faculty positions, PhD scholarships set by Directorate agenda</div></div>
+          <div class="pc-item"><div class="pc-item-dot"></div><div class="pc-item-text"><strong>Army AI Reserve:</strong> NUST/FAST graduates serve 3-year defense contracts at Rs. 400–600K/month with civilian career re-entry option</div></div>
+        </div>
+        <div class="pc-col c1">
+          <h3>DATA &amp; COMPUTE INFRASTRUCTURE</h3>
+          <div class="pc-item"><div class="pc-item-dot"></div><div class="pc-item-text"><strong>Digitize 5 years of maintenance records</strong> — Mirage, F-7PG, JF-17 fleet. This is the single highest-leverage task.</div></div>
+          <div class="pc-item"><div class="pc-item-dot"></div><div class="pc-item-text"><strong>Logistics data pipeline:</strong> Army supply chain transactions (POL, ammo, rations, spares) into structured database</div></div>
+          <div class="pc-item"><div class="pc-item-dot"></div><div class="pc-item-text"><strong>ISR imagery archive:</strong> Shahpar + PRSS-1 imagery catalogued, geotagged, timestamped — ready for ML training</div></div>
+          <div class="pc-item"><div class="pc-item-dot"></div><div class="pc-item-text"><strong>2–4 air-gapped GPU servers</strong> (NVIDIA A100 or equivalent, ~$2–4M). Deploy at Rawalpindi AI Lab. No cloud dependency.</div></div>
+          <div class="pc-item"><div class="pc-item-dot"></div><div class="pc-item-text"><strong>AI Ethics Framework:</strong> Human-in-loop requirements, no-autonomy zones, Islamic jurisprudence consultation on proportionality — publish at unclassified level</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 2 Content -->
+    <div class="phase-content" id="phase2">
+      <div class="pc-obj a"><strong>OBJECTIVE:</strong> Deploy AI systems that directly enhance combat effectiveness. Establish joint Army–PAF AI infrastructure. Begin indigenous AI hardware development and reduce Chinese dependency.</div>
+      <div class="pc-sections">
+        <div class="pc-col c2">
+          <h3>COMBAT CAPABILITY UPGRADES</h3>
+          <div class="pc-item"><div class="pc-item-dot"></div><div class="pc-item-text"><strong>Multi-source ISR fusion:</strong> Shahpar + PRSS-1 + Erieye tracks + SIGINT into single AI-assisted national picture. Pakistan's modest JADC2.</div></div>
+          <div class="pc-item"><div class="pc-item-dot"></div><div class="pc-item-text"><strong>Domestic Loitering Munition:</strong> ARL/NESCOM lead. AI-assisted EO/IR seeker. 40km range, 15kg warhead. Vehicle silhouette recognition database. 36–48 months to prototype.</div></div>
+          <div class="pc-item"><div class="pc-item-dot"></div><div class="pc-item-text"><strong>Counter-UAV AI (C-UAV):</strong> ML-based radar + EO/IR detection and classification of small drones. Integrate with HQ-9/LY-80 intercept. Critically needed post-Ukraine.</div></div>
+          <div class="pc-item"><div class="pc-item-dot"></div><div class="pc-item-text"><strong>Shahpar-III AI-native UAV:</strong> Onboard edge AI processor (Nvidia Jetson or equiv). Autonomous target detection (human in loop for engagement). Export-competitive product.</div></div>
+          <div class="pc-item"><div class="pc-item-dot"></div><div class="pc-item-text"><strong>JF-17 Block III AI integration:</strong> Work with CAC to access KLJ-7A radar AI for threat prioritization and sensor fusion in contested airspace.</div></div>
+        </div>
+        <div class="pc-col c2">
+          <h3>INTELLIGENCE &amp; CYBER</h3>
+          <div class="pc-item"><div class="pc-item-dot"></div><div class="pc-item-text"><strong>Urdu/Pashto/Dari NLP:</strong> Automated OSINT monitoring and analysis in regional languages. Applies to CT operations and strategic warning. No equivalent exists regionally.</div></div>
+          <div class="pc-item"><div class="pc-item-dot"></div><div class="pc-item-text"><strong>AI Cyber Deception:</strong> Adaptive honeypots that respond intelligently to attacker behavior. Counter Sidewinder/Rattlesnake APT specifically.</div></div>
+          <div class="pc-item"><div class="pc-item-dot"></div><div class="pc-item-text"><strong>EW Signal Classification AI:</strong> Deep learning for RF signal identification (radar types, comms protocols). ARL has the hardware; NUST has the DSP expertise.</div></div>
+          <div class="pc-item"><div class="pc-item-dot"></div><div class="pc-item-text"><strong>Organizational scaling:</strong> Directorate grows to 150–200 people. Corps-level AI cells (5 people each). PAF AI Directorate parallel structure established.</div></div>
+          <div class="pc-item"><div class="pc-item-dot"></div><div class="pc-item-text"><strong>Turkey partnership:</strong> Baykar co-development MoU. Turkish Kargu-2 seeker AI technology access in exchange for manufacturing capacity. High-probability deal.</div></div>
+          <div class="pc-item" style="background:var(--a2);padding:.8rem;border-left:2px solid var(--a);margin-top:.5rem"><div class="pc-item-dot" style="background:var(--a)"></div><div class="pc-item-text"><strong style="color:var(--a)">NEW — FPV AI Swarm Program (Ukraine Lesson):</strong> Develop 10,000 cheap ($300–500) AI-guided FPV kamikaze drones. AI target recognition, GPS-denied navigation. Single operator commands 8–12 drones. Asymmetric threat against India's armored corps. Budget: Rs. 300–400M. Highest ROI weapons program possible.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 3 Content -->
+    <div class="phase-content" id="phase3">
+      <div class="pc-obj b"><strong>OBJECTIVE:</strong> Achieve indigenous AI capabilities that reduce Chinese dependency. Develop Pakistan-specific AI advantages. Become a regional defense AI exporter. Deploy strategic AI systems.</div>
+      <div class="pc-sections">
+        <div class="pc-col c3">
+          <h3>STRATEGIC SYSTEMS</h3>
+          <div class="pc-item"><div class="pc-item-dot"></div><div class="pc-item-text"><strong>IBMS-AI (Integrated Battlefield Management):</strong> Pakistan's own JADC2-equivalent. AI-assisted joint ops C2 fusing all sensor inputs. Human decides; AI presents the picture. 7-year development arc.</div></div>
+          <div class="pc-item"><div class="pc-item-dot"></div><div class="pc-item-text"><strong>Babur cruise missile AI guidance:</strong> AI-assisted TERCOM/DSMAC that adapts to GPS jamming and degraded environments. NESCOM-led, classified. China has this on DF-10; Pakistan develops domestically.</div></div>
+          <div class="pc-item"><div class="pc-item-dot"></div><div class="pc-item-text"><strong>AI for nuclear safety:</strong> Environmental sensor monitoring, anomaly detection for storage and transport. Reduces human error risk. Internationally constructive (reduces miscalculation). SPD-led.</div></div>
+          <div class="pc-item"><div class="pc-item-dot"></div><div class="pc-item-text"><strong>Drone swarm coordination:</strong> Basic swarm algorithms for coordinated ISR (not full autonomy). Foundation: Shahpar-III fleet + edge AI. 200+ UAV coordination demonstrations possible by Year 8.</div></div>
+        </div>
+        <div class="pc-col c3">
+          <h3>INDEPENDENCE &amp; EXPORT</h3>
+          <div class="pc-item"><div class="pc-item-dot"></div><div class="pc-item-text"><strong>Domestic GPU compute:</strong> Partner UAE (G42), Saudi Arabia, or South Korea (Samsung) for chip supply or foundry access. $50–100M over 5 years. Non-negotiable for strategic independence.</div></div>
+          <div class="pc-item"><div class="pc-item-dot"></div><div class="pc-item-text"><strong>Open-source AI stack:</strong> Build military AI on Meta LLaMA / Mistral — air-gapped, fine-tuned on domestic classified data. Zero dependency on China or US for core algorithms.</div></div>
+          <div class="pc-item"><div class="pc-item-dot"></div><div class="pc-item-text"><strong>Export program:</strong> AI-enhanced Shahpar-III + Pakistani loitering munition competitive in Azerbaijan, Saudi Arabia, UAE, Nigeria, Central Asian states. Lower price than Israeli/Turkish equivalents.</div></div>
+          <div class="pc-item"><div class="pc-item-dot"></div><div class="pc-item-text"><strong>Competitive advantage:</strong> AI tuned for high-altitude mountain terrain, Urdu/Pashto language processing, specific regional threat signatures. No other country prioritizes these — Pakistan owns this niche.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ APPLICATIONS ══════════════════ -->
+<section id="apps">
+  <div class="container">
+    <div class="sec-header ai">
+      <div class="sec-tag">// PHASE 1 DEEP DIVE</div>
+      <h2 class="sec-title">5 APPLICATIONS <span class="dim">DEPLOYABLE NOW</span></h2>
+      <div class="sec-line"></div>
+      <p class="sec-desc">These have enabling conditions already in place. Technology is mature. Talent exists. Infrastructure is sufficient. These can begin in 2026.</p>
+    </div>
+    <div class="apps-grid">
+
+      <div class="app-card ai ai-d1">
+        <div class="app-num">// APPLICATION 01</div>
+        <div class="app-icon">🛰</div>
+        <div class="app-title">ISR IMAGERY ANALYSIS</div>
+        <div class="app-desc">Computer vision on Shahpar-II and PRSS-1 satellite imagery. Automated vehicle counting, change detection, pattern-of-life, facility monitoring along borders. Reduces analyst workload from 8 hours/sortie to under 1 hour.</div>
+        <div class="app-meta">
+          <div class="app-meta-row"><span class="app-meta-lbl">BUILDER</span><span class="app-meta-val">NUST SEECS Computer Vision Lab</span></div>
+          <div class="app-meta-row"><span class="app-meta-lbl">BUDGET</span><span class="app-meta-val" style="color:var(--g)">Rs. 60M (~$210K)</span></div>
+          <div class="app-meta-row"><span class="app-meta-lbl">TIMELINE</span><span class="app-meta-val">12 months (6 dev + 6 deploy)</span></div>
+          <div class="app-meta-row"><span class="app-meta-lbl">RISK</span><span><span class="risk-badge risk-l">LOW</span></span></div>
+          <div class="app-meta-row"><span class="app-meta-lbl">IMPACT</span><span class="app-meta-val">Coverage 10% → 80% of collected imagery</span></div>
+        </div>
+        <div class="app-bar-wrap"><div class="app-bar" data-w="85"></div></div>
+      </div>
+
+      <div class="app-card ai ai-d2">
+        <div class="app-num">// APPLICATION 02</div>
+        <div class="app-icon">✈️</div>
+        <div class="app-title">PREDICTIVE MAINTENANCE — PAF FLEET</div>
+        <div class="app-desc">ML on engine sensor data and maintenance logs to predict component failure before it occurs. Start with Mirage V and JF-17 Block I/II. The aging fleet bleeds maintenance budget daily — this delivers 10x ROI immediately.</div>
+        <div class="app-meta">
+          <div class="app-meta-row"><span class="app-meta-lbl">BUILDER</span><span class="app-meta-val">10Pearls or Arbisoft (defense contract)</span></div>
+          <div class="app-meta-row"><span class="app-meta-lbl">BUDGET</span><span class="app-meta-val" style="color:var(--g)">Rs. 50M (~$178K)</span></div>
+          <div class="app-meta-row"><span class="app-meta-lbl">TIMELINE</span><span class="app-meta-val">9 months</span></div>
+          <div class="app-meta-row"><span class="app-meta-lbl">RISK</span><span><span class="risk-badge risk-l">LOW</span></span></div>
+          <div class="app-meta-row"><span class="app-meta-lbl">IMPACT</span><span class="app-meta-val">15–25% reduction in unscheduled events</span></div>
+        </div>
+        <div class="app-bar-wrap"><div class="app-bar" data-w="90"></div></div>
+      </div>
+
+      <div class="app-card ai ai-d3">
+        <div class="app-num">// APPLICATION 03</div>
+        <div class="app-icon">📦</div>
+        <div class="app-title">LOGISTICS DEMAND FORECASTING</div>
+        <div class="app-desc">AI predicts demand for critical spares, fuel, ammunition, and rations at division/corps level. Replaces manual estimation that currently wastes an estimated 20–30% of logistics budget through over and under-ordering.</div>
+        <div class="app-meta">
+          <div class="app-meta-row"><span class="app-meta-lbl">BUILDER</span><span class="app-meta-val">Any mid-tier Pakistani software firm</span></div>
+          <div class="app-meta-row"><span class="app-meta-lbl">BUDGET</span><span class="app-meta-val" style="color:var(--g)">Rs. 35M (~$125K)</span></div>
+          <div class="app-meta-row"><span class="app-meta-lbl">TIMELINE</span><span class="app-meta-val">6 months</span></div>
+          <div class="app-meta-row"><span class="app-meta-lbl">RISK</span><span><span class="risk-badge risk-vl">VERY LOW</span></span></div>
+          <div class="app-meta-row"><span class="app-meta-lbl">IMPACT</span><span class="app-meta-val">20–30% reduction in logistics waste</span></div>
+        </div>
+        <div class="app-bar-wrap"><div class="app-bar" data-w="95"></div></div>
+      </div>
+
+      <div class="app-card ai ai-d1">
+        <div class="app-num">// APPLICATION 04</div>
+        <div class="app-icon">🛡</div>
+        <div class="app-title">AI CYBER THREAT DETECTION</div>
+        <div class="app-desc">ML-based anomaly detection on military network traffic. Specifically designed to flag Sidewinder/Rattlesnake APT intrusion patterns — the Indian state actor group actively targeting Pakistani military networks right now. This is urgent.</div>
+        <div class="app-meta">
+          <div class="app-meta-row"><span class="app-meta-lbl">BUILDER</span><span class="app-meta-val">Netsol/Folio3 + NITB partnership</span></div>
+          <div class="app-meta-row"><span class="app-meta-lbl">BUDGET</span><span class="app-meta-val" style="color:var(--g)">Rs. 80M (~$285K)</span></div>
+          <div class="app-meta-row"><span class="app-meta-lbl">TIMELINE</span><span class="app-meta-val">12 months</span></div>
+          <div class="app-meta-row"><span class="app-meta-lbl">RISK</span><span><span class="risk-badge risk-m">MEDIUM</span></span></div>
+          <div class="app-meta-row"><span class="app-meta-lbl">IMPACT</span><span class="app-meta-val">Detect intrusions in days, not months</span></div>
+        </div>
+        <div class="app-bar-wrap"><div class="app-bar" data-w="78"></div></div>
+      </div>
+
+      <div class="app-card ai ai-d2">
+        <div class="app-num">// APPLICATION 05</div>
+        <div class="app-icon">🎮</div>
+        <div class="app-title">SIMULATOR RED FORCE AI</div>
+        <div class="app-desc">AI-driven adversarial aircraft behavior in PAF's existing JF-17 and F-16 simulators. Current Red Force is scripted and predictable — pilots memorize the patterns. AI makes adversaries adaptive, unpredictable, and tactically creative.</div>
+        <div class="app-meta">
+          <div class="app-meta-row"><span class="app-meta-lbl">BUILDER</span><span class="app-meta-val">PAF simulator team + NUST AI researchers</span></div>
+          <div class="app-meta-row"><span class="app-meta-lbl">BUDGET</span><span class="app-meta-val" style="color:var(--g)">Rs. 40M (~$143K)</span></div>
+          <div class="app-meta-row"><span class="app-meta-lbl">TIMELINE</span><span class="app-meta-val">8 months (software only)</span></div>
+          <div class="app-meta-row"><span class="app-meta-lbl">RISK</span><span><span class="risk-badge risk-l">LOW</span></span></div>
+          <div class="app-meta-row"><span class="app-meta-lbl">IMPACT</span><span class="app-meta-val">Training quality step-change; no operational data risk</span></div>
+        </div>
+        <div class="app-bar-wrap"><div class="app-bar" data-w="88"></div></div>
+      </div>
+
+      <div class="app-card ai ai-d3" style="background:var(--g2);border:1px solid var(--g3);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;min-height:300px">
+        <div style="font-family:var(--f-head);font-size:2.5rem;color:var(--g);opacity:.3;margin-bottom:1rem">+</div>
+        <div style="font-family:var(--f-head);font-size:.8rem;color:var(--g);letter-spacing:.1em;margin-bottom:.5rem">PHASE 1 TOTAL BUDGET</div>
+        <div style="font-family:var(--f-head);font-size:2rem;font-weight:900;color:var(--g);text-shadow:0 0 30px var(--g3)">Rs. 800M</div>
+        <div style="font-family:var(--f-mono);font-size:.7rem;color:var(--tx2);margin-top:.5rem;letter-spacing:.1em">~$2.8M USD</div>
+        <div style="margin-top:1.5rem;font-family:var(--f-mono);font-size:.7rem;color:var(--g);padding:0 2rem;line-height:1.8;text-align:center">Less than the cost of a single<br>mid-range military helicopter</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ BUDGET ══════════════════ -->
+<section id="budget">
+  <div class="container">
+    <div class="sec-header ai">
+      <div class="sec-tag">// BUDGET FRAMEWORK</div>
+      <h2 class="sec-title">10-YEAR INVESTMENT <span class="dim">BREAKDOWN</span></h2>
+      <div class="sec-line"></div>
+    </div>
+    <div class="budget-grid ai">
+      <div class="budget-summary">
+        <div class="bsum-title">// INVESTMENT SUMMARY</div>
+        <div class="bbar-item" style="border-bottom:1px solid var(--border);padding-bottom:1rem;margin-bottom:1rem">
+          <div style="display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:.7rem;margin-bottom:.3rem">
+            <span style="color:var(--g)">PHASE 1</span><span style="color:var(--txb)">Rs. 800M</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:.7rem;margin-bottom:.3rem">
+            <span style="color:var(--a)">PHASE 2</span><span style="color:var(--txb)">Rs. 4.6B</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:.7rem">
+            <span style="color:var(--b)">PHASE 3</span><span style="color:var(--txb)">Rs. 18–28B</span>
+          </div>
+        </div>
+        <div class="bsum-total">
+          <div style="font-family:var(--f-mono);font-size:.6rem;color:var(--tx2);letter-spacing:.15em;margin-bottom:.5rem">10-YEAR TOTAL</div>
+          <div class="bsum-total-val">Rs. 24–34B</div>
+          <div class="bsum-total-lbl">~$85–120M USD over 10 years</div>
+        </div>
+        <div class="bsum-compare">
+          <strong>CONTEXT:</strong> The entire 10-year program costs less than 4 F-16 Block 52 aircraft ($30M each). The US spends this on a single AI pilot program in a fiscal quarter.
+        </div>
+      </div>
+
+      <div class="budget-bars">
+        <div class="bbar-item ai">
+          <div class="bbar-header">
+            <span class="bbar-phase c1">PHASE 1 — FOUNDATION</span>
+            <span class="bbar-amount">Rs. 800M</span>
+          </div>
+          <div class="bbar-span">MONTHS 0–18 · ~$2.8M USD · 2.4% OF TOTAL</div>
+          <div class="bbar-track"><div class="bbar-fill c1" data-w="8"></div></div>
+          <div class="bbar-items">
+            <span class="bbar-tag c1">Directorate Setup Rs.120M</span>
+            <span class="bbar-tag c1">GPU Compute Rs.150M</span>
+            <span class="bbar-tag c1">Data Digitization Rs.80M</span>
+            <span class="bbar-tag c1">ISR AI Rs.60M</span>
+            <span class="bbar-tag c1">Pred. Maint. Rs.50M</span>
+            <span class="bbar-tag c1">Logistics AI Rs.35M</span>
+            <span class="bbar-tag c1">Cyber AI Rs.80M</span>
+            <span class="bbar-tag c1">Simulator AI Rs.40M</span>
+            <span class="bbar-tag c1">NUST Lab Rs.100M</span>
+            <span class="bbar-tag c1">Talent Rs.85M</span>
+          </div>
+        </div>
+
+        <div class="bbar-item ai ai-d1">
+          <div class="bbar-header">
+            <span class="bbar-phase c2">PHASE 2 — OPERATIONAL AI</span>
+            <span class="bbar-amount">Rs. 4.6B</span>
+          </div>
+          <div class="bbar-span">MONTHS 18–48 · ~$16M USD · 15% OF TOTAL</div>
+          <div class="bbar-track"><div class="bbar-fill c2" data-w="18"></div></div>
+          <div class="bbar-items">
+            <span class="bbar-tag c2">Loitering Munition Rs.2B</span>
+            <span class="bbar-tag c2">Shahpar-III Rs.500M</span>
+            <span class="bbar-tag c2">C-UAV System Rs.300M</span>
+            <span class="bbar-tag c2">ISR Fusion Rs.300M</span>
+            <span class="bbar-tag c2">Cyber Offensive Rs.400M</span>
+            <span class="bbar-tag c2">Personnel 3yr Rs.600M</span>
+            <span class="bbar-tag c2">Corps AI Cells Rs.300M</span>
+            <span class="bbar-tag c2">OSINT/NLP Rs.200M</span>
+          </div>
+        </div>
+
+        <div class="bbar-item ai ai-d2">
+          <div class="bbar-header">
+            <span class="bbar-phase c3">PHASE 3 — STRATEGIC AI</span>
+            <span class="bbar-amount">Rs. 18–28B</span>
+          </div>
+          <div class="bbar-span">YEARS 4–10 · ~$65–100M USD · 83% OF TOTAL</div>
+          <div class="bbar-track"><div class="bbar-fill c3" data-w="78"></div></div>
+          <div class="bbar-items">
+            <span class="bbar-tag c3">IBMS-AI Rs.8–12B</span>
+            <span class="bbar-tag c3">Domestic Compute Rs.3–5B</span>
+            <span class="bbar-tag c3">Strategic Systems (NESCOM) Rs.5–8B</span>
+            <span class="bbar-tag c3">Export Program Rs.2–3B</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ RISK MATRIX ══════════════════ -->
+<section id="risks">
+  <div class="container">
+    <div class="sec-header ai">
+      <div class="sec-tag">// RISK REGISTER</div>
+      <h2 class="sec-title">KNOWN RISKS &amp; <span class="dim">MITIGATIONS</span></h2>
+      <div class="sec-line"></div>
+    </div>
+    <div class="risk-layout ai">
+      <div class="risk-matrix-wrap">
+        <div class="risk-matrix-title">PROBABILITY vs. IMPACT MATRIX</div>
+        <div class="risk-canvas-wrap">
+        <svg class="risk-svg" id="riskSvg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+          <!-- Grid -->
+          <defs>
+            <radialGradient id="rg1" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#ff3355" stop-opacity=".4"/><stop offset="100%" stop-color="#ff3355" stop-opacity="0"/></radialGradient>
+            <radialGradient id="rg2" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#ff8c00" stop-opacity=".3"/><stop offset="100%" stop-color="#ff8c00" stop-opacity="0"/></radialGradient>
+          </defs>
+          <!-- Background zones -->
+          <rect x="0" y="0" width="400" height="400" fill="#071626"/>
+          <rect x="200" y="0" width="200" height="200" fill="rgba(255,51,85,0.06)" rx="0"/>
+          <rect x="0" y="0" width="200" height="200" fill="rgba(255,140,0,0.04)" rx="0"/>
+          <rect x="200" y="200" width="200" height="200" fill="rgba(255,140,0,0.04)" rx="0"/>
+          <rect x="0" y="200" width="200" height="200" fill="rgba(0,195,255,0.03)" rx="0"/>
+          <!-- Zone labels -->
+          <text x="300" y="30" fill="rgba(255,51,85,0.4)" font-family="Courier New" font-size="10" letter-spacing="2" text-anchor="middle">CRITICAL</text>
+          <text x="100" y="30" fill="rgba(255,140,0,0.4)" font-family="Courier New" font-size="10" letter-spacing="2" text-anchor="middle">HIGH</text>
+          <text x="300" y="390" fill="rgba(255,140,0,0.4)" font-family="Courier New" font-size="10" letter-spacing="2" text-anchor="middle">MEDIUM</text>
+          <text x="100" y="390" fill="rgba(0,195,255,0.3)" font-family="Courier New" font-size="10" letter-spacing="2" text-anchor="middle">LOW</text>
+          <!-- Grid lines -->
+          <line x1="200" y1="0" x2="200" y2="400" stroke="rgba(1,217,107,0.1)" stroke-width="1" stroke-dasharray="4,4"/>
+          <line x1="0" y1="200" x2="400" y2="200" stroke="rgba(1,217,107,0.1)" stroke-width="1" stroke-dasharray="4,4"/>
+          <!-- Axis labels -->
+          <text x="200" y="418" fill="#4e7080" font-family="Courier New" font-size="9" text-anchor="middle" letter-spacing="2">← PROBABILITY →</text>
+          <text x="-200" y="10" fill="#4e7080" font-family="Courier New" font-size="9" text-anchor="middle" letter-spacing="2" transform="rotate(-90)">← IMPACT →</text>
+          <!-- Risk points: x=probability (0-400), y=impact (400=low, 0=high) -->
+          <!-- R1: Chinese backdoors — HIGH prob, CRITICAL impact -->
+          <circle cx="300" cy="60" r="14" fill="rgba(255,51,85,0.2)" stroke="#ff3355" stroke-width="1.5"/>
+          <text x="300" y="64" fill="#ff3355" font-family="Courier New" font-size="10" font-weight="bold" text-anchor="middle">R1</text>
+          <!-- R2: Brain drain — HIGH prob, HIGH impact -->
+          <circle cx="280" cy="140" r="14" fill="rgba(255,51,85,0.15)" stroke="#ff5566" stroke-width="1.5"/>
+          <text x="280" y="144" fill="#ff5566" font-family="Courier New" font-size="10" font-weight="bold" text-anchor="middle">R2</text>
+          <!-- R3: APT data poisoning — MED prob, CRITICAL impact -->
+          <circle cx="210" cy="55" r="14" fill="rgba(255,140,0,0.2)" stroke="#ff8c00" stroke-width="1.5"/>
+          <text x="210" y="59" fill="#ff8c00" font-family="Courier New" font-size="10" font-weight="bold" text-anchor="middle">R3</text>
+          <!-- R4: Data quality — MED prob, HIGH impact -->
+          <circle cx="230" cy="150" r="12" fill="rgba(255,140,0,0.15)" stroke="#ff8c00" stroke-width="1.5"/>
+          <text x="230" y="154" fill="#ff8c00" font-family="Courier New" font-size="10" font-weight="bold" text-anchor="middle">R4</text>
+          <!-- R5: Inter-service rivalry — MED prob, HIGH impact -->
+          <circle cx="200" cy="170" r="12" fill="rgba(255,140,0,0.15)" stroke="#ffaa00" stroke-width="1.5"/>
+          <text x="200" y="174" fill="#ffaa00" font-family="Courier New" font-size="10" font-weight="bold" text-anchor="middle">R5</text>
+          <!-- R6: Budget cuts — MED prob, HIGH impact -->
+          <circle cx="220" cy="120" r="12" fill="rgba(255,140,0,0.12)" stroke="#ffcc00" stroke-width="1.5"/>
+          <text x="220" y="124" fill="#ffcc00" font-family="Courier New" font-size="10" font-weight="bold" text-anchor="middle">R6</text>
+          <!-- R7: AI ethics controversy — LOW prob, MED impact -->
+          <circle cx="110" cy="250" r="11" fill="rgba(0,195,255,0.12)" stroke="#00c3ff" stroke-width="1.5"/>
+          <text x="110" y="254" fill="#00c3ff" font-family="Courier New" font-size="10" font-weight="bold" text-anchor="middle">R7</text>
+          <!-- Glow effects -->
+          <circle cx="300" cy="60" r="25" fill="url(#rg1)" opacity="0.5"/>
+          <circle cx="210" cy="55" r="22" fill="url(#rg2)" opacity="0.5"/>
+          <!-- Invisible hover hit targets -->
+          <circle cx="300" cy="60" r="22" fill="transparent" data-tip="R1: Chinese AI Backdoors — HIGH prob / CRITICAL impact" class="rtip"/>
+          <circle cx="280" cy="140" r="22" fill="transparent" data-tip="R2: Brain Drain — HIGH prob / HIGH impact" class="rtip"/>
+          <circle cx="210" cy="55" r="22" fill="transparent" data-tip="R3: APT Data Poisoning — MED prob / CRITICAL impact" class="rtip"/>
+          <circle cx="230" cy="150" r="20" fill="transparent" data-tip="R4: Data Quality Failure — MED prob / HIGH impact" class="rtip"/>
+          <circle cx="200" cy="170" r="20" fill="transparent" data-tip="R5: Inter-Service Rivalry — MED prob / HIGH impact" class="rtip"/>
+          <circle cx="220" cy="120" r="20" fill="transparent" data-tip="R6: Budget Cuts Yr 2–3 — MED prob / HIGH impact" class="rtip"/>
+          <circle cx="110" cy="250" r="18" fill="transparent" data-tip="R7: AI Ethics Controversy — LOW prob / MED impact" class="rtip"/>
+        </svg>
+        </div>
+      </div>
+
+      <div class="risk-list">
+        <div class="risk-item rc ai">
+          <div class="ri-head"><span class="ri-name">R1 — CHINESE AI BACKDOORS</span><span class="ri-severity sc">CRITICAL</span></div>
+          <div class="ri-text">JF-17 Block III, Wing Loong, HQ-9, Burraq all run Chinese AI. Potential for capability denial or intelligence compromise in conflict. <strong>Mitigation:</strong> Phase 2 diversification to Turkey/open-source; domestic AI stack by Year 4.</div>
+        </div>
+        <div class="risk-item rh ai ai-d1">
+          <div class="ri-head"><span class="ri-name">R2 — BRAIN DRAIN IN PROGRESS</span><span class="ri-severity sh">HIGH</span></div>
+          <div class="ri-text">NUST/FAST AI graduates are leaving for UAE, US, UK now. 3-year window before this generation is permanently gone. <strong>Mitigation:</strong> Army AI Reserve program; Rs. 400–600K/month competitive salaries; civilian re-entry guarantee.</div>
+        </div>
+        <div class="risk-item rc ai ai-d2">
+          <div class="ri-head"><span class="ri-name">R3 — APT DATA POISONING</span><span class="ri-severity sc">CRITICAL</span></div>
+          <div class="ri-text">Sidewinder group with active presence in Pakistani military networks could corrupt AI training data. A poisoned model is worse than no model. <strong>Mitigation:</strong> Air-gapped training infrastructure; data provenance tracking; cyber defense app (Application 04) is prerequisite.</div>
+        </div>
+        <div class="risk-item rh ai ai-d3">
+          <div class="ri-head"><span class="ri-name">R4 — DATA QUALITY FAILURE</span><span class="ri-severity sh">HIGH</span></div>
+          <div class="ri-text">Military records are paper-based or in incompatible systems. Every major military AI program hit this wall first. <strong>Mitigation:</strong> Data digitization is Month 1–12 priority before any AI development begins. Non-negotiable.</div>
+        </div>
+        <div class="risk-item rh ai">
+          <div class="ri-head"><span class="ri-name">R5 — INTER-SERVICE RIVALRY</span><span class="ri-severity sh">HIGH</span></div>
+          <div class="ri-text">Army–PAF–Navy data sharing and joint AI infrastructure require political will at CJCSC level. India's theatre commands stalled here. <strong>Mitigation:</strong> Directorate authority placed under CJCSC, not individual service chief. Joint mandate from Day 1.</div>
+        </div>
+        <div class="risk-item rh ai ai-d1">
+          <div class="ri-head"><span class="ri-name">R6 — BUDGET CUTS IN YEAR 2–3</span><span class="ri-severity sh">HIGH</span></div>
+          <div class="ri-text">Phase 1 applications must deliver visible, measurable wins before the first budget review cycle. If leadership doesn't see results, the program stalls permanently. <strong>Mitigation:</strong> Early wins strategy — Application 03 (Logistics AI) shows cost savings within 6 months.</div>
+        </div>
+        <div class="risk-item rm ai ai-d2">
+          <div class="ri-head"><span class="ri-name">R7 — AI ETHICS CONTROVERSY</span><span class="ri-severity sm">MEDIUM</span></div>
+          <div class="ri-text">Religious or political objections to autonomous systems, surveillance AI, or AI in targeting. <strong>Mitigation:</strong> Proactively publish AI ethics framework with Islamic jurisprudence input. Pakistan's Islamic ethics framework for AI warfare is actually a strategic differentiator internationally.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ 90-DAY PLAN ══════════════════ -->
+<section id="action">
+  <div class="container">
+    <div class="sec-header ai">
+      <div class="sec-tag">// IMMEDIATE ACTION PLAN</div>
+      <h2 class="sec-title">FIRST <span class="hl" style="color:var(--g)">90 DAYS</span></h2>
+      <div class="sec-line"></div>
+      <p class="sec-desc">Seven concrete actions that create irreversible momentum. None require new legislation. All are within existing authority.</p>
+    </div>
+    <div class="action-timeline">
+
+      <div class="act-item">
+        <div class="act-num">01</div>
+        <div class="act-header">
+          <div class="act-title">APPOINT DIRECTOR AI</div>
+          <div class="act-days">DAY 1–14</div>
+        </div>
+        <div class="act-desc">Appoint a Brigadier with genuine STEM background as Director AI. This person's credibility defines the program's entire trajectory. Rank matters for access; competence matters for results. Wrong appointment here cannot be recovered from. Give the Director direct access to VCOAS and a personal mandate letter from COAS.</div>
+        <div class="act-note">⚡ This is the single most important decision in the entire roadmap</div>
+      </div>
+
+      <div class="act-item">
+        <div class="act-num">02</div>
+        <div class="act-header">
+          <div class="act-title">COMMISSION NUST 30-DAY CAPABILITY ASSESSMENT</div>
+          <div class="act-days">DAY 1–30</div>
+        </div>
+        <div class="act-desc">Formally task NUST SEECS Rector to provide a written assessment: what AI capabilities can they deliver, on what timeline, at what cost, with what team. This becomes the Phase 1 technical specification. Simultaneously establish security clearance fast-track for NUST faculty who will work on classified programs.</div>
+        <div class="act-note">→ Deliverable: Written capability matrix from NUST by Day 30</div>
+      </div>
+
+      <div class="act-item">
+        <div class="act-num">03</div>
+        <div class="act-header">
+          <div class="act-title">DATA AUDIT — ONE CORPS, ONE PAF BASE</div>
+          <div class="act-days">DAY 15–45</div>
+        </div>
+        <div class="act-desc">Select one Corps HQ (recommend Rawalpindi Corps) and one PAF base (recommend Mushaf/Sargodha). Audit every digital record: format, completeness, years of history, accessibility. This 30-day audit will reshape Phase 1 priorities and prevent expensive mistakes in data infrastructure design. A 5-person team from NUST + 2 military officers can complete this.</div>
+        <div class="act-note">→ Deliverable: Data audit report — foundation for all Phase 1 AI development</div>
+      </div>
+
+      <div class="act-item">
+        <div class="act-num">04</div>
+        <div class="act-header">
+          <div class="act-title">DRAFT DIRECTORATE CHARTER</div>
+          <div class="act-days">DAY 15–60</div>
+        </div>
+        <div class="act-desc">Legal authority document defining: scope of Directorate mandate, budget lines, fast-procurement rules (contracts under Rs. 50M awarded within 60 days), civilian hire authority, inter-service data sharing rights, classification levels for AI research, and relationship with NESCOM/ARL/AWC. This is Pakistan's iDEX. Submit for COAS/CAS/CNS approval before Day 60.</div>
+        <div class="act-note">→ Without this charter, the Directorate has no authority to move quickly</div>
+      </div>
+
+      <div class="act-item">
+        <div class="act-num">05</div>
+        <div class="act-header">
+          <div class="act-title">BENCHMARK VISIT — TURKEY &amp; UAE</div>
+          <div class="act-days">DAY 30–75</div>
+        </div>
+        <div class="act-desc">Send Director AI + 2 technical officers (total: 3 people) to Ankara (Baykar Technologies, TUBITAK defense AI labs, ASELSAN) and Abu Dhabi (EDGE Group, Bayanat). These are the two most replicable models for Pakistan. Specific questions: How did you structure the organization? What were your first 6 months? What would you do differently? Request formal knowledge-sharing MoU with both.</div>
+        <div class="act-note">→ Turkey relationship is specifically high-value: Baykar has expressed openness to co-development</div>
+      </div>
+
+      <div class="act-item">
+        <div class="act-num">06</div>
+        <div class="act-header">
+          <div class="act-title">ISSUE RFPs FOR PHASE 1 APPLICATIONS</div>
+          <div class="act-days">DAY 45–75</div>
+        </div>
+        <div class="act-desc">Issue Request for Proposals to: NUST SEECS (ISR Imagery AI — Rs. 60M), 10Pearls or Arbisoft (Logistics Demand Forecasting — Rs. 35M), Folio3 or Netsol (Cyber Threat Detection — Rs. 80M), PAF Simulator Team + NUST (Red Force AI — Rs. 40M). Predictive Maintenance RFP issued after data audit confirms sensor data availability. All under the new fast-procurement charter.</div>
+        <div class="act-note">→ Applications can be in development simultaneously, not sequentially</div>
+      </div>
+
+      <div class="act-item">
+        <div class="act-num">07</div>
+        <div class="act-header">
+          <div class="act-title">PROCURE AIR-GAPPED GPU INFRASTRUCTURE</div>
+          <div class="act-days">DAY 60–90</div>
+        </div>
+        <div class="act-desc">Identify and initiate procurement of 2–4 air-gapped GPU servers for the Rawalpindi AI Lab. Procurement options: NVIDIA A100/H100 via UAE intermediary (if US export license achievable), Chinese Biren BR100 (immediate but dependency risk), or high-end data center hardware from South Korean or European sources. This hardware is the foundation for all AI training — without it, everything else is theoretical. Budget: Rs. 150M.</div>
+        <div class="act-note">→ Air-gapped = never connected to internet; physically secured at AI Lab facility</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ APPENDIX ══════════════════ -->
+<section id="appendix">
+  <div class="container">
+    <div class="sec-header ai">
+      <div class="sec-tag">// APPENDIX</div>
+      <h2 class="sec-title">LESSONS EVERY MILITARY <span class="dim">WISHES IT LEARNED EARLIER</span></h2>
+      <div class="sec-line"></div>
+    </div>
+    <div class="append-grid ai">
+      <div class="append-block">
+        <h3>// UNIVERSAL LESSONS FROM 6 MILITARIES</h3>
+        <div class="append-item">
+          <div class="append-num">01</div>
+          <div class="append-text"><strong>Start with data, not algorithms.</strong> The US spent 3 years trying to build Project Maven before realizing analysts hadn't labeled the training data properly. Every major military AI program hit data walls first. Data infrastructure is not glamorous — it is everything.</div>
+        </div>
+        <div class="append-item">
+          <div class="append-num">02</div>
+          <div class="append-text"><strong>The organizational problem is harder than the technical problem.</strong> JADC2 was technically feasible by 2021. It isn't deployed in 2025 because Army, Navy, Air Force couldn't agree on data standards. Define organizational architecture before technical architecture.</div>
+        </div>
+        <div class="append-item">
+          <div class="append-num">03</div>
+          <div class="append-text"><strong>AI in training before AI in operations.</strong> Every military that deployed AI in training first had smoother operational deployments. The learning curve is painful. Take it in simulators — not in the field.</div>
+        </div>
+        <div class="append-item">
+          <div class="append-num">04</div>
+          <div class="append-text"><strong>Don't build what you can buy.</strong> Logistics AI, predictive maintenance, and cyber AI are commercial problems with commercial solutions. Military-specific versions rarely justify the development cost. Buy adapted commercial solutions; only develop custom AI where genuinely classified requirements exist.</div>
+        </div>
+        <div class="append-item">
+          <div class="append-num">05</div>
+          <div class="append-text"><strong>AI ethics governance is a strategic asset, not overhead.</strong> Israel's Gospel controversy cost more in international legitimacy than it gained tactically. For Pakistan's nuclear-armed, internationally scrutinized strategic environment, publishing an Islamic jurisprudence-aligned AI ethics framework is a genuine differentiator.</div>
+        </div>
+      </div>
+      <div class="append-block">
+        <h3>// PAKISTAN-SPECIFIC ADVANTAGES TO EXPLOIT</h3>
+        <div class="append-item">
+          <div class="append-num">A</div>
+          <div class="append-text"><strong>High-altitude AI specialization.</strong> No other country is optimizing military AI for Himalayan/Karakoram terrain (15,000+ ft operations, extreme cold, thin air effects on sensors). Pakistan owns this niche — and it's directly applicable to the most likely operational environment.</div>
+        </div>
+        <div class="append-item">
+          <div class="append-num">B</div>
+          <div class="append-text"><strong>Urdu/Pashto/Dari NLP.</strong> No Western or Chinese military has AI optimized for these language families. Pakistan can develop the world's best SIGINT/OSINT AI for the South-Central Asian region — and it has export value to Afghanistan, Central Asia, and the Gulf.</div>
+        </div>
+        <div class="append-item">
+          <div class="append-num">C</div>
+          <div class="append-text"><strong>The Shahpar export advantage.</strong> Azerbaijan already buys both Shahpar (from Pakistan) and TB2 (from Turkey). An AI-upgraded Shahpar-III competes directly in markets where Turkey is strong — at lower price. The customer relationships already exist.</div>
+        </div>
+        <div class="append-item">
+          <div class="append-num">D</div>
+          <div class="append-text"><strong>CPEC fiber as dual-use backbone.</strong> The CPEC digital infrastructure along key corridors is the most underappreciated dual-use military communications asset. With proper military-grade encryption overlay, this becomes a resilient command network that India cannot easily disrupt without escalating to CPEC itself.</div>
+        </div>
+        <div class="append-item">
+          <div class="append-num">E</div>
+          <div class="append-text"><strong>Counter-terrorism AI expertise transfer.</strong> Two decades of CT operations in FATA/KPK have generated unique pattern-of-life analysis tradecraft that can be formalized into AI training data. Pakistan's irregular warfare analytical knowledge is genuinely world-class and is an untapped AI training asset.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ FOOTER ══════════════════ -->
+<footer>
+  <div class="foot-logo">PAKISTAN ARMY // AI DIRECTORATE</div>
+  <div class="foot-class">◆ INTERNAL PLANNING DOCUMENT // NOT FOR DISTRIBUTION</div>
+  <div class="foot-meta">
+    Strategic Roadmap 2026–2035 &nbsp;·&nbsp; Prepared February 2026<br>
+    Next mandatory review: <strong style="color:var(--g)">February 2027</strong><br>
+    Prepared using open-source intelligence, SIPRI, IISS Military Balance, and comparative military AI analysis<br><br>
+    <span style="color:var(--tx2)">For updates, corrections, or classification queries — contact AI Directorate Planning Cell</span>
+  </div>
+</footer>
+
+<!-- ══════════════════ SCRIPTS ══════════════════ -->
+<script>
+/* ─── LOADER RADAR ─── */
+(function(){
+  const c = document.getElementById('loaderCanvas');
+  const ctx = c.getContext('2d');
+  const cx=100, cy=100, r=85;
+  let angle=0, trail=[];
+  function drawLoader(){
+    ctx.clearRect(0,0,200,200);
+    // Rings
+    [.33,.66,1].forEach(s=>{
+      ctx.beginPath();ctx.arc(cx,cy,r*s,0,Math.PI*2);
+      ctx.strokeStyle='rgba(1,217,107,0.2)';ctx.lineWidth=1;ctx.stroke();
+    });
+    // Cross
+    ctx.strokeStyle='rgba(1,217,107,0.15)';
+    ctx.beginPath();ctx.moveTo(cx-r,cy);ctx.lineTo(cx+r,cy);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(cx,cy-r);ctx.lineTo(cx,cy+r);ctx.stroke();
+    // Trail
+    trail.push(angle);
+    if(trail.length>60)trail.shift();
+    trail.forEach((a,i)=>{
+      const op=i/trail.length*0.5;
+      ctx.beginPath();ctx.moveTo(cx,cy);
+      ctx.arc(cx,cy,r,a,a+0.08);
+      ctx.closePath();
+      ctx.fillStyle=`rgba(1,217,107,${op})`;ctx.fill();
+    });
+    // Sweep line
+    ctx.beginPath();ctx.moveTo(cx,cy);
+    ctx.lineTo(cx+Math.cos(angle)*r,cy+Math.sin(angle)*r);
+    ctx.strokeStyle='rgba(1,217,107,0.9)';ctx.lineWidth=1.5;ctx.stroke();
+    // Center dot
+    ctx.beginPath();ctx.arc(cx,cy,3,0,Math.PI*2);
+    ctx.fillStyle='#01d96b';ctx.fill();
+    angle+=0.05;
+    requestAnimationFrame(drawLoader);
+  }
+  drawLoader();
+  // Load bar
+  const bar=document.getElementById('loadBar');
+  let w=0;
+  const iv=setInterval(()=>{
+    w+=Math.random()*8+2;
+    if(w>=100){w=100;clearInterval(iv);}
+    bar.style.width=w+'%';
+  },80);
+  // Hide loader
+  setTimeout(()=>{
+    document.getElementById('loader').classList.add('out');
+  },2600);
+})();
+
+/* ─── HERO RADAR CANVAS ─── */
+(function(){
+  const c=document.getElementById('radar');
+  const ctx=c.getContext('2d');
+  let W,H,particles=[],angle=0;
+  function resize(){
+    W=c.width=c.offsetWidth;H=c.height=c.offsetHeight;
+  }
+  resize();
+  // Create particles using actual canvas dimensions
+  function initParticles(){
+    particles=[];
+    for(let i=0;i<120;i++){
+      particles.push({
+        x:Math.random()*W,y:Math.random()*H,
+        r:Math.random()*1.5+.3,
+        vx:(Math.random()-.5)*.15,vy:(Math.random()-.5)*.15,
+        op:Math.random()*.5+.1
+      });
+    }
+  }
+  resize();initParticles();
+  window.addEventListener('resize',()=>{resize();initParticles();});
+  function drawRadar(){
+    ctx.clearRect(0,0,W,H);
+    const cx=W/2,cy=H/2;
+    // Gradient background glow
+    const grd=ctx.createRadialGradient(cx,cy,0,cx,cy,Math.min(W,H)*.7);
+    grd.addColorStop(0,'rgba(1,217,107,0.04)');
+    grd.addColorStop(1,'transparent');
+    ctx.fillStyle=grd;ctx.fillRect(0,0,W,H);
+    // Concentric rings
+    const maxR=Math.min(W,H)*.45;
+    [.25,.5,.75,1].forEach(s=>{
+      ctx.beginPath();ctx.arc(cx,cy,maxR*s,0,Math.PI*2);
+      ctx.strokeStyle=`rgba(1,217,107,${0.06+s*0.03})`;
+      ctx.lineWidth=1;ctx.stroke();
+    });
+    // Radar lines
+    [0,Math.PI/2,Math.PI,Math.PI*1.5].forEach(a=>{
+      ctx.beginPath();ctx.moveTo(cx,cy);
+      ctx.lineTo(cx+Math.cos(a)*maxR,cy+Math.sin(a)*maxR);
+      ctx.strokeStyle='rgba(1,217,107,0.06)';ctx.lineWidth=1;ctx.stroke();
+    });
+    // Sweep trail
+    for(let i=0;i<40;i++){
+      const a=angle-(i/40)*.8;
+      const op=(1-i/40)*0.15;
+      ctx.beginPath();ctx.moveTo(cx,cy);
+      ctx.arc(cx,cy,maxR,a,a+0.04);
+      ctx.closePath();
+      ctx.fillStyle=`rgba(1,217,107,${op})`;ctx.fill();
+    }
+    // Sweep line
+    ctx.beginPath();ctx.moveTo(cx,cy);
+    ctx.lineTo(cx+Math.cos(angle)*maxR,cy+Math.sin(angle)*maxR);
+    const gl=ctx.createLinearGradient(cx,cy,cx+Math.cos(angle)*maxR,cy+Math.sin(angle)*maxR);
+    gl.addColorStop(0,'rgba(1,217,107,0)');
+    gl.addColorStop(1,'rgba(1,217,107,0.6)');
+    ctx.strokeStyle=gl;ctx.lineWidth=2;ctx.stroke();
+    // Particles
+    particles.forEach(p=>{
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0)p.x=W;if(p.x>W)p.x=0;
+      if(p.y<0)p.y=H;if(p.y>H)p.y=0;
+      // Light up particles under sweep
+      const pdx=p.x-cx,pdy=p.y-cy;
+      const pa=Math.atan2(pdy,pdx);
+      let da=angle-pa;
+      while(da>Math.PI)da-=Math.PI*2;while(da<-Math.PI)da+=Math.PI*2;
+      const lit=da>=0&&da<0.2;
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r*(lit?2.5:1),0,Math.PI*2);
+      ctx.fillStyle=lit?`rgba(1,217,107,${p.op*3})`:`rgba(1,217,107,${p.op})`;
+      ctx.fill();
+    });
+    angle+=0.008;
+    requestAnimationFrame(drawRadar);
+  }
+  drawRadar();
+})();
+
+/* ─── COUNTER ANIMATION ─── */
+function animateCounter(el){
+  if(el.dataset.counted)return;
+  el.dataset.counted='1';
+  const target=+el.dataset.count;
+  const suffix=el.dataset.suffix||'';
+  const dur=1800;const start=performance.now();
+  function update(t){
+    const p=Math.min((t-start)/dur,1);
+    const ease=1-Math.pow(1-p,4);
+    el.textContent=Math.round(target*ease)+suffix;
+    if(p<1)requestAnimationFrame(update);
+  }
+  requestAnimationFrame(update);
+}
+// Observe hero stats to trigger counters when visible
+const counterObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting)e.target.querySelectorAll('[data-count]').forEach(animateCounter);
+  });
+},{threshold:0.5});
+document.querySelectorAll('.hero-stats').forEach(el=>counterObs.observe(el));
+
+/* ─── INTERSECTION OBSERVER ─── */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('v');
+      // Animate bars in tables
+      e.target.querySelectorAll&&e.target.querySelectorAll('.bar-fill[data-w]').forEach(b=>{
+        setTimeout(()=>b.style.width=b.dataset.w+'%',200);
+      });
+      // Animate app bars
+      e.target.querySelectorAll&&e.target.querySelectorAll('.app-bar[data-w]').forEach(b=>{
+        setTimeout(()=>b.style.width=b.dataset.w+'%',400);
+      });
+      // Animate budget bars
+      e.target.querySelectorAll&&e.target.querySelectorAll('.bbar-fill[data-w]').forEach(b=>{
+        setTimeout(()=>b.style.width=b.dataset.w+'%',300);
+      });
+    }
+  });
+},{threshold:0.12});
+
+document.querySelectorAll('.ai,.act-item').forEach(el=>obs.observe(el));
+
+// Also observe table wrapper to trigger bar animations
+const tableObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.bar-fill[data-w]').forEach((b,i)=>{
+        setTimeout(()=>b.style.width=b.dataset.w+'%',i*80+200);
+      });
+    }
+  });
+},{threshold:0.1});
+document.querySelectorAll('.table-wrap').forEach(el=>tableObs.observe(el));
+
+const budgObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.bbar-fill[data-w]').forEach((b,i)=>{
+        setTimeout(()=>b.style.width=b.dataset.w+'%',i*200+400);
+      });
+    }
+  });
+},{threshold:0.2});
+document.querySelectorAll('.budget-bars').forEach(el=>budgObs.observe(el));
+
+const appObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.app-bar[data-w]').forEach((b,i)=>{
+        setTimeout(()=>b.style.width=b.dataset.w+'%',i*100+300);
+      });
+    }
+  });
+},{threshold:0.1});
+document.querySelectorAll('.apps-grid').forEach(el=>appObs.observe(el));
+
+/* ─── PHASE TABS ─── */
+function switchPhase(n){
+  document.querySelectorAll('.phase-tab').forEach((t,i)=>t.classList.toggle('active',i===n-1));
+  document.querySelectorAll('.phase-content').forEach((c,i)=>c.classList.toggle('active',i===n-1));
+}
+
+/* ─── NAV ACTIVE STATE ─── */
+const sections=document.querySelectorAll('section[id]');
+const navLinks=document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll',()=>{
+  let cur='';
+  sections.forEach(s=>{
+    if(window.scrollY>=s.offsetTop-120)cur=s.id;
+  });
+  navLinks.forEach(a=>{
+    a.classList.toggle('active',a.getAttribute('href')==='#'+cur);
+  });
+},{ passive:true });
+
+/* ─── SCROLL PROGRESS ─── */
+const prog=document.getElementById('scroll-prog');
+const btt=document.getElementById('btt');
+window.addEventListener('scroll',()=>{
+  const doc=document.documentElement;
+  const pct=(doc.scrollTop/(doc.scrollHeight-doc.clientHeight))*100;
+  prog.style.width=pct+'%';
+  btt.classList.toggle('show',doc.scrollTop>600);
+},{passive:true});
+
+/* ─── MOBILE HAMBURGER ─── */
+function toggleMenu(){
+  document.getElementById('hamburger').classList.toggle('open');
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+function closeMenu(){
+  document.getElementById('hamburger').classList.remove('open');
+  document.getElementById('mobileMenu').classList.remove('open');
+}
+
+/* ─── RISK SVG TOOLTIPS ─── */
+const tip=document.getElementById('svgTip');
+document.querySelectorAll('.rtip').forEach(el=>{
+  el.addEventListener('mousemove',e=>{
+    tip.textContent=el.dataset.tip;
+    tip.style.display='block';
+    tip.style.left=(e.clientX+14)+'px';
+    tip.style.top=(e.clientY-10)+'px';
+  });
+  el.addEventListener('mouseleave',()=>tip.style.display='none');
+});
+</script>
+</body>
+</html>
