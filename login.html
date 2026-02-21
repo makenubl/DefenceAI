@@ -136,7 +136,7 @@ async function hashString(str) {
   const stored = localStorage.getItem(SESSION_KEY);
   if(stored) {
     const expected = await hashString(EXPECTED_USER + ':pakistan2026');
-    if(stored === expected) window.location.replace('index.html');
+    if(stored === expected) window.location.replace('briefing.html');
   }
 })();
 
@@ -175,7 +175,7 @@ async function doLogin(){
     if(entered===expected){
       showMsg('success','ACCESS GRANTED — LOADING SYSTEM');
       localStorage.setItem(SESSION_KEY, expected);
-      setTimeout(()=>window.location.replace('index.html'),800);
+      setTimeout(()=>window.location.replace('briefing.html'),800);
       return;
     }
   }
