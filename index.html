@@ -3,6 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+(async function(){
+  const k='pak-ai-auth';
+  const stored=localStorage.getItem(k);
+  if(!stored){window.location.replace('login.html');return;}
+  const enc=new TextEncoder();
+  const buf=await crypto.subtle.digest('SHA-256',enc.encode('admin:pakistan2026'));
+  const expected=Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+  if(stored!==expected){localStorage.removeItem(k);window.location.replace('login.html');}
+})();
+</script>
 <title>Pakistan AI Directorate — Strategic Roadmap 2026</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
@@ -316,6 +327,7 @@ footer{background:var(--s2);border-top:1px solid var(--border);padding:3rem 2rem
   <div style="display:flex;align-items:center;gap:1rem">
     <a href="briefing.html" style="font-family:var(--f-mono);font-size:.6rem;letter-spacing:.1em;padding:.3rem .8rem;border:1px solid var(--g);color:var(--g);text-decoration:none;border-radius:3px;white-space:nowrap">▶ EXEC BRIEFING</a>
     <div class="nav-badge">◆ INTERNAL DOCUMENT</div>
+    <button onclick="localStorage.removeItem('pak-ai-auth');window.location.replace('login.html')" style="background:none;border:1px solid rgba(255,51,85,0.4);color:rgba(255,51,85,0.7);font-family:var(--f-mono);font-size:.6rem;letter-spacing:.1em;padding:.3rem .7rem;border-radius:3px;cursor:pointer" title="Sign out">⏻</button>
     <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
